@@ -32,6 +32,15 @@ function printName() {
   console.log(id);
   console.log(lastName);
   console.log(name);
+
+  let z = 50;
+
+  //cannot redclare let variable
+  // let z = 55;
+
+  //can redclare var variable
+  var age = 25;
+  console.log(age);
 }
 printName();
 
@@ -46,3 +55,16 @@ function checkScope() {
 }
 
 checkScope();
+
+function hostVariable() {
+  console.log(a);
+  console.log(b);
+  console.log(c);
+
+  // var variable will be hosted . Let and const will not be hosted
+  var a = 10;
+  let b = 20;
+  let c = 30;
+}
+
+hostVariable();
