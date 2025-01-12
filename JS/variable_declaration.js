@@ -44,6 +44,7 @@ function printName() {
 }
 printName();
 
+console.log("-----Scope level--------");
 function checkScope() {
   //local scope cannot be access outside the its block
   //   console.log(age);
@@ -53,7 +54,7 @@ function checkScope() {
   //global scope access and with new assign value for variable "name" at line 25
   console.log(name);
 }
-
+console.log("-----Hosting variable--------");
 checkScope();
 
 function hostVariable() {
@@ -67,4 +68,20 @@ function hostVariable() {
   let c = 30;
 }
 
-hostVariable();
+// hostVariable();
+
+console.log("-----Test variable--------");
+function testVariable() {
+  if (true) {
+    var a = 9;
+    let b = 12;
+    const c = "Hello";
+  }
+
+  console.log(a);
+
+  // b and c will not be print as they are local scope and will be restircted to if block only
+  console.log(b);
+  console.log(c);
+}
+testVariable();
