@@ -102,3 +102,10 @@ const arr8 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 const grouped = Object.groupBy(arr8, (num) => (num % 2 === 0 ? "even" : "odd"));
 
 console.log(grouped);
+
+// 18) Flat
+const arr = [1, [2, 3], [4, 5]];
+
+//convert nested array into one array
+const flatArr = arr.flat();
+console.log(flatArr);
