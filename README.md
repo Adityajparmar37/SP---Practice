@@ -13,3 +13,5 @@ Task 5 -> All String method
 Task 6 -> All Array method
 
 Task 7 -> All Object method
+
+Task 8 -> All type of function
