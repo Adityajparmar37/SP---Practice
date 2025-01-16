@@ -45,8 +45,11 @@ console.log(filtered);
 
 // will return new array with element which satisfied the test condition
 const triple = arr1.map((num) => num * 3);
+const double = arr1.map((num) => {
+  return num * 2;
+});
 const resName = names.map((nam) => nam >= "I");
-console.log(resName);
+console.log(double);
 
 // 9) sort
 
@@ -109,3 +112,13 @@ const arr = [1, [2, 3], [4, 5]];
 //convert nested array into one array
 const flatArr = arr.flat();
 console.log(flatArr);
+
+// 19) unshift and shift
+const arr9 = [1, 2, 3, 4, 0, 100, 12000, 200];
+arr9.unshift(-1);
+arr9.shift(200);
+
+// 20) push and pop
+const leng = arr9.push(900);
+console.log(leng);
+arr9.pop();

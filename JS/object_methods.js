@@ -10,10 +10,10 @@ const obj1 = { a: 1, b: 2 };
 const obj2 = { b: 3, c: 4 };
 //create an object from 2 object
 //target, source
-const res = Object.assign(obj1, obj2);
+const res = Object.assign({},obj1, obj2);
 console.log(obj1);
 console.log(res);
-console.log(res === obj1);
+console.log("Object assign compare " , res === obj1);
 obj1.a = 6;
 console.log(obj1);
 console.log(res);

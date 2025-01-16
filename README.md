@@ -15,3 +15,5 @@ Task 6 -> All Array method
 Task 7 -> All Object method
 
 Task 8 -> All type of function
+
+Task 9 -> CallBack, Closure, Curring, HigerOrderFunction, ScopChain

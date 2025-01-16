@@ -16,7 +16,8 @@ console.log(str2.search("How"));
 console.log(str2.search(check));
 
 //5)
-console.log(str2.slice(7, 12));
+console.log("original string" , str2);
+console.log("slice stirng", str2.slice(7, 12));
 console.log(str2.slice(7)); // 7 to last
 console.log(str2.slice(0, 9));
 
