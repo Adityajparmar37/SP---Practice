@@ -1,7 +1,7 @@
 Object.prototype.forEach = function (callBack) {
   for (let keys in this) {
     if (Object.hasOwn(this, keys)) {
-      callBack(this[keys]);
+      callBack(keys,this[keys],this);
     }
   }
 };
@@ -12,8 +12,9 @@ const obj = {
   c: 4,
 };
 
-function Maybe(elem) {
-  console.log(elem * 2);
+function Maybe(key,value,currentObject) {
+  // console.log(elem * 2);
+  console.log(key,  " :", value, " from object", currentObject);
 }
 
 obj.forEach(Maybe);
