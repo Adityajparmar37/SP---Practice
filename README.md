@@ -23,3 +23,5 @@ Task 10 -> Order of Execution
 Task 11 -> Map and Set
 
 Task 12 -> Destructing 
+
+Task 13 -> Spread and Rest Operator
