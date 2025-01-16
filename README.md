@@ -17,3 +17,5 @@ Task 7 -> All Object method
 Task 8 -> All type of function
 
 Task 9 -> CallBack, Closure, Curring, HigerOrderFunction, ScopChain
+
+Task 10 -> Order of Execution 
