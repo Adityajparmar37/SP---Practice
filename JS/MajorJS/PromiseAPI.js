@@ -97,4 +97,7 @@ Promise.all(allPromises)
   })
   .catch((e) => {
     console.log(e);
+
+    // to print Aggregate Error
+    console.log(e.errors);
   });
