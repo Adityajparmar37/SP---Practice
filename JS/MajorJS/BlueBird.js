@@ -139,14 +139,4 @@ Bluebird.config({
 // promise.then(console.log).catch(console.log)
 
 
-const nums = [1, 2, 3, 4];
-const res = Bluebird.map(nums, async (num) => {
-    // console.log(nums);
-    const promise = Bluebird.delay(1000,num)    
-    if (num === 2) promise.cancel();
-  
-  return promise;
-})
-  .then(console.log)
-  .catch(console.error);
-  
+
