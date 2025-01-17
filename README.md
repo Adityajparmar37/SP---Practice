@@ -26,5 +26,6 @@ Task 12 -> Destructing
 
 Task 13 -> Spread and Rest Operator
 
-
 Task 14 -> Module import export 
+
+Task 15 -> Promise and Promise API
