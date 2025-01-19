@@ -33,3 +33,5 @@ Task 15 -> Promise and Promise API
 Task 16 -> Async Await 
 
 Task 17 -> BlueBird done
+
+Task 18 -> Call API Sequnitailly 

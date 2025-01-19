@@ -1,6 +1,16 @@
 //1) forEach
 const numbers = [1, 2, 3, 4];
+const obj = {
+  multiplier: 2,
+  multiply(element) {
+    console.log(element*this.multiplier);
+  }
+}
+const obj2 = {
+  multiplier:100
+}
 numbers.forEach((num) => console.log(num * 2));
+numbers.forEach(obj.multiply, obj2 );
 
 //2) indexOf
 const arr1 = [2, 4, 6, 10, 8];
