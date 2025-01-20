@@ -103,15 +103,15 @@ const arr1 = [2, 4, 6, 3, 10, 8];
 // console.log(resTech);
 
 // // 13) reduce
-const sum = arr1.reduce((acc, num) => {
-    if (num == 2) {
-        return acc;
-    }
-    else {
-        return acc + num;
-    }
-}, 0);
-console.log(sum);
+// const sum = arr1.reduce((acc, num) => {
+//     if (num == 2) {
+//         return acc;
+//     }
+//     else {
+//         return acc + num;
+//     }
+// }, 0);
+// console.log(sum);
 
 // // 14) reduceRight
 // const sum2 = arr1.reduceRight((acc, num) => acc - num, 0);
@@ -202,3 +202,9 @@ console.log(sum);
 // // console.log(users.slice(2));
 // users.splice(2,2,"Hello","how are you");
 // console.log(users);
+
+
+// 24) copeWithin
+let arr = [1, 2, 3, 4, 5];
+arr.copyWithin(1, 3, 5);
+console.log(arr)
