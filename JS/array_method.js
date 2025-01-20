@@ -9,11 +9,19 @@
 // const obj2 = {
 //   multiplier:100
 // }
-// numbers.forEach((num) => console.log(num * 2));
+// numbers.forEach((num) => {
+//     if (num === 3) {
+//         console.log("hi");
+//         return;
+//     } else {
+//         console.log("how")
+//         return num;
+//      }
+// });
 // numbers.forEach(obj.multiply, obj2 );
 
 // //2) indexOf
-// const arr1 = [2, 4, 6, 10, 8];
+const arr1 = [2, 4, 6, 3, 10, 8];
 // // use strict equality
 // console.log(arr1.indexOf(10));
 
@@ -48,7 +56,14 @@
 
 // // will return all element which satisfied the test function
 // const arr4 = [3, 5, 7, 15, 20];
-// const filtered = arr4.filter((num) => num >= 10);
+// const filtered = arr4.filter((num) => {
+//     if (num === 7) {
+//         return 'hello';
+//     }
+//     else {
+//         return num;
+// }
+// });
 // console.log(filtered);
 
 // // 8) map
@@ -56,7 +71,11 @@
 // // will return new array with element which satisfied the test condition
 // const triple = arr1.map((num) => num * 3);
 // const double = arr1.map((num) => {
-//   return num * 2;
+//     if (num === 3) {
+//         return "hello"
+//     } else {
+//         return num * 2;
+//   }
 // });
 // const resName = names.map((nam) => nam >= "I");
 // console.log(double);
@@ -84,8 +103,15 @@
 // console.log(resTech);
 
 // // 13) reduce
-// const sum = arr1.reduce((acc, num) => acc + num, 0);
-// console.log(sum);
+const sum = arr1.reduce((acc, num) => {
+    if (num == 2) {
+        return acc;
+    }
+    else {
+        return acc + num;
+    }
+}, 0);
+console.log(sum);
 
 // // 14) reduceRight
 // const sum2 = arr1.reduceRight((acc, num) => acc - num, 0);
@@ -95,7 +121,16 @@
 
 // //will check if there any element which satisfied the givin condition ( any one elememt or first element get satisfied then it will stop there)
 // const arr6 = [2, 4, 7, 5, 8, 9, 3, 1, 0, -1, -2, -3, -8];
-// const hasEven = arr6.some((num) => num % 2 == 0);
+// const hasEven = arr6.some((num) => {
+//     if (num === 4) {
+//         console.log(num);
+//         return "hello"
+//     } else {
+//         console.log(num)
+//         return num%2!=0
+//     }
+// });
+// console.log(hasEven);
 // const hasOdd = arr6.some((num) => num % 2 !== 0);
 
 // console.log(hasEven, hasOdd);
@@ -115,7 +150,7 @@
 // // check even
 // console.log(arr10.every((elem) => elem % 2 == 0)); // false
 
-// // check even but invert it hence check odd 
+// // check even but invert it hence check odd
 // console.log(!arr10.some((elem) => elem % 2 != 0));  // true
 
 
@@ -144,29 +179,26 @@
 // arr9.pop();
 
 
-//21) keys
-const arr = ['a', 'b', 'c','d','e'];
-const keysOfArr = arr.keys();
+// //21) keys
+// const arr = ['a', 'b', 'c','d','e'];
+// const keysOfArr = arr.keys();
 
-// for (const key of keysOfArr) {
-//     console.log(key);
+// // for (const key of keysOfArr) {
+// //     console.log(key);
+// // }
+
+
+// // 24) values
+// const valuesOfArr = arr.values();
+// for (const value of valuesOfArr) {
+//     console.log(value)
 // }
 
 
-// 24) values
-const valuesOfArr = arr.values();
-for (const value of valuesOfArr) {
-    console.log(value)
-}
+// // 23) splice
 
+// const users = ["Ted", "Tim", "Ton", "Sam", "Sor", "Sod"];
 
-// 23) splice
-
-const users = ["Ted", "Tim", "Ton", "Sam", "Sor", "Sod"];
-
-// console.log(users.slice(2));
-users.splice(2,2,"Hello","how are you");
-console.log(users);
-
-
-
+// // console.log(users.slice(2));
+// users.splice(2,2,"Hello","how are you");
+// console.log(users);
