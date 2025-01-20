@@ -153,7 +153,14 @@ const keysOfArr = arr.keys();
 // }
 
 
-// 22) splice
+// 24) values
+const valuesOfArr = arr.values();
+for (const value of valuesOfArr) {
+    console.log(value)
+}
+
+
+// 23) splice
 
 const users = ["Ted", "Tim", "Ton", "Sam", "Sor", "Sod"];
 
