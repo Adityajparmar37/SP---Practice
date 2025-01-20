@@ -109,6 +109,16 @@
 
 // console.log(hasEven2, hasOdd);
 
+// //some as every
+// const arr10 = [2,4,6];
+
+// // check even
+// console.log(arr10.every((elem) => elem % 2 == 0)); // false
+
+// // check even but invert it hence check odd 
+// console.log(!arr10.some((elem) => elem % 2 != 0));  // true
+
+
 // // 17) groupby
 
 // const arr8 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -138,18 +148,18 @@
 const arr = ['a', 'b', 'c','d','e'];
 const keysOfArr = arr.keys();
 
-for (const key of keysOfArr) {
-    console.log(key);
-}
+// for (const key of keysOfArr) {
+//     console.log(key);
+// }
 
 
-//some as every
-const arr10 = [2,4,6];
+// 22) splice
 
-// check even
-console.log(arr10.every((elem) => elem % 2 == 0)); // false
+const users = ["Ted", "Tim", "Ton", "Sam", "Sor", "Sod"];
 
-// check even but invert it hence check odd 
-console.log(!arr10.some((elem) => elem % 2 != 0));  // true
+// console.log(users.slice(2));
+users.splice(2,2,"Hello","how are you");
+console.log(users);
+
 
 
