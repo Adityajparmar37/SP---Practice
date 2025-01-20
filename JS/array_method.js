@@ -134,6 +134,15 @@
 // arr9.pop();
 
 
+//21) keys
+const arr = ['a', 'b', 'c','d','e'];
+const keysOfArr = arr.keys();
+
+for (const key of keysOfArr) {
+    console.log(key);
+}
+
+
 //some as every
 const arr10 = [2,4,6];
 
@@ -142,3 +151,5 @@ console.log(arr10.every((elem) => elem % 2 == 0)); // false
 
 // check even but invert it hence check odd 
 console.log(!arr10.some((elem) => elem % 2 != 0));  // true
+
+
