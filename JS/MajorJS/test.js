@@ -116,45 +116,45 @@
 //When you use await in a filter callback, the callback always returns a promise. Since promises are always truthy, everything item in the array passes the filter. Writing await in a filter is like writing this code: hence rather then filtering it will return all promises
 
 
-async function fetchUser(names) {
-    const promises = names.map(async (name) => {
-        const data = await NameAPI(name);
-        // console.log(data);
+// async function fetchUser(names) {
+//     const promises = names.map(async (name) => {
+//         const data = await NameAPI(name);
+//         // console.log(data);
 
-        // i can even have any condition or can manipulate the data before return
-        //eg -> if(data > 25) return data
-        //eg -> return data + 100
+//         // i can even have any condition or can manipulate the data before return
+//         //eg -> if(data > 25) return data
+//         //eg -> return data + 100
         
-        return data;
-    })
+//         return data;
+//     })
     
     
-    // const promises = names.filter(async (name) => {
-    //     const data = await NameAPI(name);
-    //     if (data === "Parth") {
-    //         return data;
-    //     }
-    // })
+//     // const promises = names.filter(async (name) => {
+//     //     const data = await NameAPI(name);
+//     //     if (data === "Parth") {
+//     //         return data;
+//     //     }
+//     // })
     
     
-    console.log("Promises : " , promises);
+//     console.log("Promises : " , promises);
 
 
-    const results = await Promise.all(promises);
+//     const results = await Promise.all(promises);
 
-    console.log("Results : " , results);
-}
+//     console.log("Results : " , results);
+// }
 
-async function NameAPI(name) {
-    return new Promise((res, rej) => {
-        setTimeout(() => {
-            return res(`User ${name}`)
-        },3000)
-    })
-}
+// async function NameAPI(name) {
+//     return new Promise((res, rej) => {
+//         setTimeout(() => {
+//             return res(`User ${name}`)
+//         },3000)
+//     })
+// }
 
-names = ["Devanshu","Sijo","Sagar","Parth","Krupal"]
-fetchUser(names)
+// names = ["Devanshu","Sijo","Sagar","Parth","Krupal"]
+// fetchUser(names)
 
 
 
@@ -211,3 +211,14 @@ fetchUser(names)
 //   console.log(sum)
 //   console.log('End')
 // }
+
+
+
+const arrayLike = {
+    length: 4,
+    0: 'a',
+    1: 'b',
+    2: 'c',
+}
+
+console.log(Array.prototype.indexOf.call(arrayLike,'c'));
