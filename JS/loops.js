@@ -49,3 +49,21 @@ for (let key of Object.keys(person)) {
 for (let index in fruits) {
   console.log(`${index} : ${fruits[index]}`);
 }
+
+
+const asyncIterable = [
+  Promise.resolve(1),
+  Promise.resolve(2),
+  Promise.resolve(3),
+];
+
+
+(async () => {
+for await (const value of asyncIterable){
+  console.log(value)
+}
+})();
+
+// for await(const value of asyncIterable){
+//   console.log(value)
+// }
