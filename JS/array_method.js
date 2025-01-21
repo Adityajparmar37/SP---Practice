@@ -21,7 +21,7 @@
 // numbers.forEach(obj.multiply, obj2 );
 
 // //2) indexOf
-const arr1 = [2, 4, 6, 3, 10, 8];
+// const arr1 = [2, 4, 6, 3, 10, 8];
 // // use strict equality
 // console.log(arr1.indexOf(10));
 
@@ -66,6 +66,23 @@ const arr1 = [2, 4, 6, 3, 10, 8];
 // });
 // console.log(filtered);
 
+// const arr3 = [1, 2, 3, 4, 5];
+// try 
+//     arr3.filter((m) => {
+//         if (m === 3) {
+//             throw new Error("3 caught")
+//         }
+//         else {
+//             console.log(m);
+//         }
+//     })
+// } catch (e) {
+//     console.log(e)
+// }
+
+// console.log("Contiune");
+
+
 // // 8) map
 
 // // will return new array with element which satisfied the test condition
@@ -79,6 +96,26 @@ const arr1 = [2, 4, 6, 3, 10, 8];
 // });
 // const resName = names.map((nam) => nam >= "I");
 // console.log(double);
+
+
+// how to break map loop
+// const arr3 = [1, 2, 3, 4, 5];
+// try {
+//     arr3.map((m) => {
+//         if (m === 3) {
+//             throw new Error("3 caught")
+//         }
+//         else {
+//             console.log(m);
+//         }
+//     })
+// } catch (e) {
+//     console.log(e)
+// }
+
+// console.log("Contiune");
+
+
 
 // // 9) sort
 
@@ -116,6 +153,25 @@ const arr1 = [2, 4, 6, 3, 10, 8];
 // // 14) reduceRight
 // const sum2 = arr1.reduceRight((acc, num) => acc - num, 0);
 // console.log(sum2);
+
+//how to break reduce
+// const arr3 = [1, 2, 3, 4, 5];
+
+// try {
+//     arr3.reduce((m,curr) => {
+//         if (curr === 3) {
+//             throw new Error("3 caught")
+//         }
+//         else {
+//             console.log(m);
+//         }
+//     })
+// } catch (e) {
+//     console.log(e)
+// }
+
+// console.log("Contiune");
+
 
 // // 15) some
 
@@ -208,3 +264,4 @@ const arr1 = [2, 4, 6, 3, 10, 8];
 let arr = [1, 2, 3, 4, 5];
 arr.copyWithin(1, 3, 5);
 console.log(arr)
+
