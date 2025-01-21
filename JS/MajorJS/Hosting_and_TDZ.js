@@ -1,5 +1,7 @@
 getName()
 console.log(x);
+
+// TDZ
 console.log(y);
 
 var x = 7;
@@ -10,8 +12,10 @@ const hello = function getName(){
     console.log("NamasteJS")
 } 
 
-
+//TDZ
 // function declaration host
 function getName() {
     console.log("Hi Aditya");
 }
+
+const getName = () => console.log("hello");
