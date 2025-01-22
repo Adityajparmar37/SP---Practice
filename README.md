@@ -37,3 +37,7 @@ Task 17 -> BlueBird done
 Task 18 -> Call API Sequnitailly 
 
 Task 19 -> Hosting and TDZ
+
+Task 20 -> "this" in JS
+
+Task 21 -> Object Chaining and inheritance 
