@@ -18,26 +18,28 @@ Task 8 -> All type of function
 
 Task 9 -> CallBack, Closure, Curring, HigerOrderFunction, ScopChain
 
-Task 10 -> Order of Execution 
+Task 10 -> Order of Execution
 
 Task 11 -> Map and Set
 
-Task 12 -> Destructing 
+Task 12 -> Destructing
 
 Task 13 -> Spread and Rest Operator
 
-Task 14 -> Module import export 
+Task 14 -> Module import export
 
 Task 15 -> Promise and Promise API
 
-Task 16 -> Async Await 
+Task 16 -> Async Await
 
 Task 17 -> BlueBird done
 
-Task 18 -> Call API Sequnitailly 
+Task 18 -> Call API Sequnitailly
 
 Task 19 -> Hosting and TDZ
 
 Task 20 -> "this" in JS
 
-Task 21 -> Object Chaining and inheritance 
+Task 21 -> Object Chaining and inheritance
+
+Task 22 -> Default Parameter, optional chaining, Nullish Operator
