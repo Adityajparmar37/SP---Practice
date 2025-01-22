@@ -196,3 +196,27 @@ const proto = { type: "animal" };
 const obj8 = { name: "Dog" };
 Object.setPrototypeOf(obj8, proto);
 console.log(obj8.type);
+
+
+
+//shallow copy vs deep copy
+
+// reference for nested object will be same but not the main
+const obj = { a: 1, b: { c: 2 } };
+const shallowCopy = { ...obj };
+
+// shallowCopy.b.c = 10;
+shallowCopy.a = 20;
+
+console.log(obj.a);
+console.log(shallowCopy.a);
+
+const original = { a: 1, b: { c: 2 } };
+const deepCopy = structuredClone(original);
+
+// in deep copy you cannot change anything not even nested object
+deepCopy.a = 42;
+deepCopy.b.c = 41;
+
+console.log(original.a);
+console.log(original.b.c);
