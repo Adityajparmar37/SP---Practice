@@ -43,3 +43,6 @@ Task 20 -> "this" in JS
 Task 21 -> Object Chaining and inheritance
 
 Task 22 -> Default Parameter, optional chaining, Nullish Operator
+
+
+Pratice link -> https://chatgpt.com/share/678f9fae-8a50-8010-b3f8-8e0fc5ac04cb
