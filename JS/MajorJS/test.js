@@ -107,13 +107,13 @@
 // forEach --> does not wait for async task
 
 
-//The for...of loop can be used to iterate over an array (or any iterable) one element at a time. When you use await inside a for...of loop, it ensures that the code waits for the asynchronous operation (the promise) to complete before moving on to the next iteration.
+// The for...of loop can be used to iterate over an array (or any iterable) one element at a time. When you use await inside a for...of loop, it ensures that the code waits for the asynchronous operation (the promise) to complete before moving on to the next iteration.
 
 
-//When used with async/await, map does not inherently wait for the promises to resolve. Instead, it creates an array of promises, which you can then handle using Promise.all or similar to resolve them all concurrently.
+// When used with async/await, map does not inherently wait for the promises to resolve. Instead, it creates an array of promises, which you can then handle using Promise.all or similar to resolve them all concurrently.
 
 
-//When you use await in a filter callback, the callback always returns a promise. Since promises are always truthy, everything item in the array passes the filter. Writing await in a filter is like writing this code: hence rather then filtering it will return all promises
+// When you use await in a filter callback, the callback always returns a promise. Since promises are always truthy, everything item in the array passes the filter. Writing await in a filter is like writing this code: hence rather then filtering it will return all promises
 
 
 // async function fetchUser(names) {
