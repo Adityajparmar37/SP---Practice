@@ -612,5 +612,121 @@
 // Promise.allSettled(promises).then((res) => {
 //     res.forEach((result) => console.log(result));
 // })
+// console.log(Object.is(NaN, NaN));
+// console.log(NaN === NaN);
+
+// console.log(Object.is(+0, -0));
+// console.log(+0 === -0);
 
 
+// const obj = Object.freeze({
+//     a: 1,
+//     b: {
+//         c: 2,
+//     },
+// });
+
+// obj.a = 10;
+
+// // nested object can be even change in freeze . Hence need to even freeze nested object
+// obj.b.c = 20;
+
+// console.log(obj.a);
+// console.log(obj.b.c);
+
+
+// const proto = { greet: "Hello" };
+// const obj = Object.create(proto);
+
+// console.log(obj.greet);
+// console.log(obj);
+// // false becz it will be in prototype in obj , not in property
+// console.log(obj.hasOwnProperty("greet"));
+
+
+// const key = "name";
+// const obj = {
+//     [key] : "Aditya"
+// }
+
+// console.log(obj[key]);
+// console.log(obj.name);
+
+// const target = { a: 1 };
+// const source = { b: 2, a: 3 };
+
+// // const result1 = Object.assign(target, source);
+// const result2 = { ...target, ...source };
+
+// console.log(result1);
+// console.log(result2);
+
+// const obj = {
+//     a: 1,
+//     b:2,
+// }
+
+// Object.seal(obj);
+
+// obj.a = 10;
+// delete obj.b;
+// console.log(obj);
+
+
+// // reference for nested object will be same but not the main
+// const obj = { a: 1, b: { c: 2 } };
+// const shallowCopy = { ...obj };
+
+// // shallowCopy.b.c = 10;
+// shallowCopy.a = 20;
+
+// console.log(obj.a);
+// console.log(shallowCopy.a);
+
+// const original = { a: 1, b: { c: 2 } };
+// const deepCopy = structuredClone(original);
+
+// // in deep copy you cannot change anything not even nested object
+// deepCopy.a = 42;
+// deepCopy.b.c = 41;
+
+// console.log(original.a);
+// console.log(original.b.c);
+
+
+// const obj = Object.create({ inherited: 42 });
+// obj.own = "Hello";
+
+// invocation is different
+
+// console.log(Object.hasOwn(obj, "own"));
+// console.log(Object.hasOwn(obj, "inherited"));
+// console.log(obj.hasOwnProperty("own"));
+// console.log(obj.hasOwnProperty("inherited"));
+
+
+// const obj = {
+//     value: 10,
+//     hello() {
+//         return this.value;
+//     },
+// };
+
+
+// // if you extract out the function then it will be invoke through window
+// const extractedMethod = obj.hello;
+// console.log(obj.hello());
+// console.log(extractedMethod());
+
+// const obj = { a: 1, b: 2 };
+// Object.assign(obj, obj);
+// console.log(obj)
+
+// const obj = {};
+// Object.defineProperty(obj, "hidden", {
+//     value: "You can't see me!",
+//     enumerable: false,
+// });
+
+// console.log(Object.keys(obj));
+// console.log(obj.hidden);
