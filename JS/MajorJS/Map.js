@@ -15,6 +15,7 @@ console.log(freq);
 
 const user = new Map();
 user.set('id', 1)
+user.set('name', 'krupal')
 user.set('name', 'Aditya')
 user.set('role', 'Developer')
 

@@ -468,12 +468,149 @@
 // obj.print();
 
 
-let name = false;
-if (name ?? undefined) {
-    console.log("name");
-} else if (name || 15) {
-    console.log("in if else");
-}
-else {
-    console.log("name in else")
-}
+// let name = false;
+// if (name ?? undefined) {
+//     console.log("name");
+// } else if (name || 15) {
+//     console.log("in if else");
+// }
+// else {
+//     console.log("name in else")
+// }
+
+// console.log("Start");
+
+// const promise = new Promise((resolve, reject) => {
+//     console.log("Promise created");
+//     resolve("Promise resolved");
+// });
+
+// promise.then((value) => console.log(value));
+
+// console.log("End");
+
+
+// Promise.resolve(1).then((value) => {
+//     console.log(value);
+//     return value + 1;
+// }).then((value) => {
+//     console.log(value);
+//     throw new Error("Something went wrong");
+// }).catch((error) => {
+//     console.log(error.message);
+//     return 10;
+// }).then((value) => {
+//     console.log(value)
+// })
+
+// setTimeout(() => console.log("Timeout"), 0);
+
+// Promise.resolve().then(() => {
+//     console.log("Promise resolved");
+// });
+
+// console.log("End of script");
+
+// async function test() {
+//     try {
+//         const result = await Promise.reject("Error occured");
+//         console.log(result);
+//     } catch (error) {
+//         console.log("Caught: ", error);
+//     } finally {
+//         console.log("Finally Block");
+//     }
+// }
+// test();
+
+// async function asyncFunc() {
+//     console.log(1);
+//     const promise = new Promise((res) => res(2));
+//     console.log(await promise);
+//     console.log(3)
+// }
+
+// console.log(0);
+// asyncFunc();
+// console.log(4)
+
+
+// const promise1 = Promise.resolve(1);
+// const promise2 = Promise.reject("Failed");
+// const promise3 = Promise.resolve(3);
+
+// Promise.all([promise1,promise2,promise3]).then((values)=>console.log(values)).catch((error)=>console.log(error))
+
+// function delay(ms) {
+//     return new Promise((resolve) => setTimeout(resolve, ms));
+// }
+
+// async function delayedExecution() {
+//     console.log("start");
+//     await delay(1000);
+//     console.log("1 second later");
+//     await delay(2000);
+//     console.log("3 seconds total");
+// }
+
+// delayedExecution();
+
+
+// async function fetchData() {
+//     return "Data fetchData"
+// }
+
+// async function nested() {
+//     const data = await fetchData();
+//     console.log(data);
+//     return "nested completed"
+// }
+
+// async function main() {
+//     console.log("start");
+//     const result = await nested();
+//     console.log(result);
+//     console.log("end");
+// }
+
+// main();
+
+// const obj = {
+//     a: 1,
+//     b: 2,
+//     a:5
+// }
+// console.log(obj);
+// const { a, b, c:d = 5 } = obj;
+// console.log(a,b,d)
+
+
+// function name() {
+//     console.log("Aditya")
+// }
+
+// name()
+// let name = "Hello"
+// console.log(name);
+
+// async function test() {
+//     console.log("Inside Test");
+//     return 42;
+// }
+
+// const result = test();
+// console.log(result);
+
+
+// const promises = [
+//     Promise.resolve("Resolved"),
+//     Promise.reject("Rejected"),
+//     Promise.resolve("Another Resolved")
+// ];
+
+
+// Promise.allSettled(promises).then((res) => {
+//     res.forEach((result) => console.log(result));
+// })
+
+
