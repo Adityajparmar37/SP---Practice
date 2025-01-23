@@ -1,0 +1,92 @@
+HTTPs -> Hyper Text Transfer Protocol ( can be stateless or statefull depends on requirment )
+
+
+Q) What are HTTP Headers?
+
+Ans : Stores Metadata -> Key value pair sent along with req & res
+
+use for : caching, authentication, manage state
+
+type : - Request Header ( from client )
+	 - Response Header ( from server )
+	 - Respresentation Header ( encoding / Cmopression )
+	 - Payload Headers ( data )
+	 etc 
+
+Headers :
+
+1) Most Common Headers : - Accept : application/json
+				 - User - Agent : from which application request has came ( like form browser, app, windows, linux etc)
+				 - Authorization: Bearera token 
+                         - content-type: video, image, text, html
+ 				 - cookie : user session time, user login - logout time, user minor data ( form of key value pair)
+                         - cache-control : use to store data over the network and expire data (
+
+2) Cross Origin Resoure Sharing: - Access-Control-Allow-Origin  (  Specifies which origins are allowed to access a resource on a server )
+					   - Access-Control-Allow-Credentails ( Indicates whether credentials (cookies, HTTP authentication, or client-side SSL certificates) are allowed to be included in the cross-origin request. )
+                                 - Access-Control-Allow-Method (Specifies the HTTP methods (e.g., GET, POST, PUT, etc.) that are allowed when accessing the resource in response to a preflight request.)
+
+
+3)  Security : - Cross-origin-Embedder-Policy
+		   - Cross-origin-opener-Policy
+               - Content-Security-Policy
+               - X-XSS-Protection 
+
+
+
+
+
+
+
+Q) URL What it is ?
+
+Use as not to be remember IP address rather remember proper name/domain
+
+URI -> Uniform Resource Identifier 
+URL -> Uniform Resource Locator
+URN -> Uniform Resource Name
+
+
+
+Q) HTTP Methods ?
+
+GET: retrieve a resoure to data ( carry less data and attach with URL hence unhide data )
+HEAD: No message body ( response headers only like to get user agent)
+OPTIONS: what operation/methods are avaiable for a endpoint
+TRACE: loopback test ( get same data when we use any proxy to forward or backward any request and wants to know which proxy is been used e.g: nginx )
+DELETE: Remove a resource
+POST: Interact with rescoure in hide form ( means can carry more data and that too not attach with URL )
+PUT: Interact with resource 
+PATCH: Change part of a resouce ( paritally updation )
+
+All are method not complusory rules to be followed 
+
+
+
+Q) HTTP Status Code:
+
+1xx -> Informational ( server get the passed info and process or handling it )
+2xx -> success
+3xx -> redirect ( url is now redirect to other domain )
+4xx -> client error
+5xx -> server error 
+
+
+eg
+
+100 -> Continue
+102 -> Processing
+
+200 -> ok
+201 -> created
+
+307 -> Temporary Redirect
+308 -> Permanent Redirect
+
+
+400 -> Bad Request ( server will not process the request due to client-side issue This usually happens because the request is malformed, contains invalid syntax, or does not comply with the expected format or parameters)
+401 -> Unauthorized
+402 -> Payment Required
+404 -> Not Found
+500 -> Internal Server Error
+504 -> GateWay Time Out

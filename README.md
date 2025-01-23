@@ -1,5 +1,7 @@
 # SP---Practice
 
+JAVASCRIPT
+
 Task 1 -> var, let and const variable
 
 Task 2 -> All type of operators
@@ -46,3 +48,8 @@ Task 22 -> Default Parameter, optional chaining, Nullish Operator
 
 
 Pratice link -> https://chatgpt.com/share/678f9fae-8a50-8010-b3f8-8e0fc5ac04cb
+
+
+NODEJS
+
+Task 1 -> Learn About HTTP Headers
