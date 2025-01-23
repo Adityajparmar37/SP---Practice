@@ -730,3 +730,59 @@
 
 // console.log(Object.keys(obj));
 // console.log(obj.hidden);
+
+
+const obj = {
+    a: 1,
+    
+    ArrFun: () => {
+        console.log("This of Arrow", this);
+    },
+
+    DecFun() {
+        console.log("Function Declaration ", this)
+        return function returnFun(){
+        console.log("Return Function ", this);
+    }
+    },
+    ExpFun: function () {
+      console.log("Function Expression " , this);  
+    },
+
+    Nestedobj: {
+        b: 2,
+        NestedObjectArrFun: () => {
+            console.log("Nested Object Arrow Function", this);
+        },
+        NestedObjectFun() {
+            console.log("Nested Object Decalration Function", this);
+            const obj3 =  {
+                obj3Fun() {
+                    console.log("Nested Nested Object ", obj.Nestedobj.NestedObjectArrFun());
+                }
+            }
+            obj3.obj3Fun()
+            return function returnFun(){
+            console.log("Return Function ", this);
+            }
+        },
+        NestedObjectExpFun: function () {
+            console.log("Nested Object Expression Function" , this);
+        }
+    }
+}
+
+
+obj.ArrFun();
+const returnFun = obj.DecFun();
+returnFun()
+obj.ExpFun();
+
+console.log("--------Nested Object-------")
+
+obj.Nestedobj.NestedObjectArrFun();
+const NestedReturnFun = obj.Nestedobj.NestedObjectFun();
+NestedReturnFun();
+obj.Nestedobj.NestedObjectExpFun();
+
+// Arrow functions lexically bind this, meaning they inherit this from the context in which they were created, not the context in which they are called
