@@ -53,3 +53,5 @@ Pratice link -> https://chatgpt.com/share/678f9fae-8a50-8010-b3f8-8e0fc5ac04cb
 NODEJS
 
 Task 1 -> Learn About HTTP Headers
+
+Task 2 -> Event Loop
