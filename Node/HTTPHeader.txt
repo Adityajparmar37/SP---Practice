@@ -16,10 +16,12 @@ type : - Request Header ( from client )
 Headers :
 
 1) Most Common Headers : - Accept : application/json
+				 - Host : domain name of the server
 				 - User - Agent : from which application request has came ( like form browser, app, windows, linux etc)
 				 - Authorization: Bearera token 
                          - content-type: video, image, text, html
  				 - cookie : user session time, user login - logout time, user minor data ( form of key value pair)
+				 - Location : Redirect client to other URL
                          - cache-control : use to store data over the network and expire data (
 
 2) Cross Origin Resoure Sharing: - Access-Control-Allow-Origin  (  Specifies which origins are allowed to access a resource on a server )
