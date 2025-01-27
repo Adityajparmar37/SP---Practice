@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { addATodo, getAllTodos, removeATodo, updateATodo } from "../controller/todo.controller.js";
-import { handleAsync } from "../middleware/Handler/handleAsync.js";
+import { handleAsync } from "../Handler/handleAsync.js";
 import { validatorMid } from "../middleware/validator.middleware.js";
 import {todoValidator, updateTodoValidator} from "../validator/todo.validator.js"
 
