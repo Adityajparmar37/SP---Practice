@@ -92,4 +92,3 @@ eg
 404 -> Not Found
 500 -> Internal Server Error
 504 -> GateWay Time Out
-

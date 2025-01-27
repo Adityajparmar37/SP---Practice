@@ -198,17 +198,17 @@
 // })();
 
 
-// const fs = require("fs");
+const fs = require("fs");
 
-// fs.watch('./HTTPHeader.txt', (eventType, filename) => {
-//     if (filename) {
-//         console.log(`File ${filename} has a ${eventType} event.`);
-//     } else {
-//         console.log(`File has a ${eventType} event`);
-//     }
-// })
+fs.watch('./HTTPHeaders.txt', (eventType, filename) => {
+    if (filename) {
+        console.log(`File ${filename} has a ${eventType} event.`);
+    } else {
+        console.log(`File has a ${eventType} event`);
+    }
+})
 
-const fs = require('fs');
+// const fs = require('fs');
 
 // fs.stat('./newdir/destination.txt', (err, stats) => {
 //     if (err) {
