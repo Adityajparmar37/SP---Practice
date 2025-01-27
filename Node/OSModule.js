@@ -5,6 +5,8 @@ const os = require('os');
 console.log(os.arch());
 
 //Provides operating system-specific constants for errors, signals, and priorities.
+
+// Signals are a form of inter-process communication etla ketla IPC che ae signals thai 
 console.log(os.constants.signals.SIGINT);
 
 // Returns an array of objects containing information about each CPU/core installed.
