@@ -13,3 +13,5 @@ Task 4 -> Fs Module
 Task 5 -> REPL Module (Basic)
 
 Task 6 -> HTTP Module, Routing and HTTP vs HTTP/2
+
+Task 7 -> Os Module Basic 
