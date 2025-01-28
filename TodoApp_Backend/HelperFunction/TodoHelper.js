@@ -14,7 +14,6 @@ export const getAllTodosLogic = async (filters) => {
     if (!success || allTodosData.length === 0) return { success: false, message: "No Todos Found" };
     
     let filterTodos = allTodosData;
-
     if (status) filterTodos = filterData(filterTodos, status, "status");
     if (priority) filterTodos = filterData(filterTodos, priority, "priority");
     if (sort) sortData(filterTodos, sort, "index");
