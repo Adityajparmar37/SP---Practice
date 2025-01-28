@@ -14,7 +14,7 @@ export const getAllTodos = handleAsync (async (req, res, next) => {
 })
 
 
-// route to add new todo to list
+
 export const addTodo = handleAsync(async (req, res, next) => {
     const todoData = req.body
 
