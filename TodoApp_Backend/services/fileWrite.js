@@ -12,6 +12,6 @@ export const WriteToDosFromFile = async (data) => {
         return {success:true}
     } catch (error) {
         console.log("File Writing Funciton error" , error);
-        return {success:false, erroe:error.message}
+        return {success:false, error:error.message}
     }
 }
