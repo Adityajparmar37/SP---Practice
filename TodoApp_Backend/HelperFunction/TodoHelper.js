@@ -6,8 +6,7 @@ import { removeData } from "../filters/removeData.js";
 import { createId } from "../utils/createId.js";
 import { getDataIndex } from "../filters/getdataIndex.js";
 
-export const getAllTodosLogic = async (filters) => {
-  const { sort, status, priority } = filters;
+export const getAllTodosLogic = async ({ sort, status, priority }) => {
   const { success, allTodosData } = await ReadTodosFromFile();
 
   if (!success || allTodosData.length === 0)
@@ -41,7 +40,6 @@ export const addTodoLogic = async (newTodoData) => {
 
 
 export const removeTodoLogic = async (index) => {
-  console.log("index", index);
   const { success, allTodosData } = await ReadTodosFromFile();
   if (!success) return { success: false, message: "No Todos Found" };
 

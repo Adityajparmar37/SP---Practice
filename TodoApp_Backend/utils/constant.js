@@ -8,8 +8,3 @@ export const statusMapping = {
   D: "Done",
   ND: "Not Done",
 };
-
-export const sortMapping = {
-  ASEC: "Asecending",
-  DSEC: "Descending",
-};

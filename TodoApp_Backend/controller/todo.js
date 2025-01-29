@@ -7,11 +7,8 @@ import {
 } from "../helperFunction/TodoHelper.js";
 
 export const getAllTodos = handleAsync(async (req, res, next) => {
-  const { sort, status, priority } = req.query;
-  const filters = { sort, status, priority };
-
+  const filters = req.query;
   const result = await getAllTodosLogic(filters);
-
   if (!result.success) return res.status(400).json({ message: result.message });
   res
     .status(200)
@@ -19,10 +16,8 @@ export const getAllTodos = handleAsync(async (req, res, next) => {
 });
 
 export const addTodo = handleAsync(async (req, res, next) => {
-  const todoData = req.body;
-
-  const result = await addTodoLogic(todoData);
-
+  const newTodoData = req.body;
+  const result = await addTodoLogic(newTodoData);
   if (!result.success) return res.status(400).json({ message: result.message });
   res
     .status(200)
@@ -30,9 +25,8 @@ export const addTodo = handleAsync(async (req, res, next) => {
 });
 
 export const removeTodo = handleAsync(async (req, res, next) => {
-  const index = req.params.index;
-  const result = await removeTodoLogic(index);
-
+  const TodoIndex = req.params.index;
+  const result = await removeTodoLogic(TodoIndex);
   if (!result.success) return res.status(400).json({ message: result.message });
   res.status(200).json({ message: result.message });
 });
@@ -40,12 +34,7 @@ export const removeTodo = handleAsync(async (req, res, next) => {
 export const updateTodo = handleAsync(async (req, res) => {
   const TodoIndex = req.params.index;
   const upateTodoData = req.body;
-
-  if (!TodoIndex)
-    return res.status(400).json({ message: "Please choose a Todo to update" });
-
   const result = await updateTodoLogic(TodoIndex, upateTodoData);
-
   if (!result.success) return res.status(400).json({ message: result.message });
   res
     .status(200)

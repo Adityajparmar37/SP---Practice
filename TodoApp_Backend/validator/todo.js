@@ -8,15 +8,19 @@ export const statusValidator = (status) => {
   return null;
 };
 
+export const sortValidator = (sort) => {
+  if (typeof sort !== "string" || !["ASEC", "DESC"].includes(sort))
+    return {
+      field: "sort",
+      message: "sort must be either ASEC or DESC",
+    };
+};
+
 export const priorityValidator = (priority) => {
-  console.log("priority value ", priority);
-  console.log("priority type ", typeof priority);
-  console.log(!["Low", "Medium", "High"].includes(priority));
   if (
     typeof priority !== "string" ||
     !["Low", "Medium", "High"].includes(priority)
   ) {
-    console.log("Hello form if");
     return {
       field: "priority",
       message: "priority must be either of Low, Medium or High",
@@ -70,6 +74,11 @@ export const todoFieldValidator = (data) => {
   if (data.priority) {
     const priorityError = priorityValidator(data.priority);
     if (priorityError) errors.push(priorityError);
+  }
+
+  if (data.sort) {
+    const sortError = sortValidator(data.sort);
+    if (sortError) errors.push(sortError);
   }
 
   return errors.length > 0 ? { error: { details: errors } } : {};
