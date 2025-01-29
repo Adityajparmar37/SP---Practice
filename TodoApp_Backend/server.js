@@ -1,5 +1,5 @@
 import express from "express";
-import TodoAPI from "./routes/todo.route.js"
+import TodoAPI from "./routes/todo.js"
 
 
 const app = express();

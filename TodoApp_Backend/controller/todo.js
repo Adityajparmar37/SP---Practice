@@ -1,4 +1,4 @@
-import { handleAsync } from "../middleware/handleAsync.middleware.js";
+import { handleAsync } from "../middleware/handleAsync.js";
 import { addTodoLogic, getAllTodosLogic, removeTodoLogic, updateTodoLogic } from "../helperFunction/TodoHelper.js";
 
 
