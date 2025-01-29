@@ -7,19 +7,25 @@ export const statusValidator = (status) => {
 
   return null;
 };
+
 export const priorityValidator = (priority) => {
-  console.log("priority", priority);
+  console.log("priority value ", priority);
+  console.log("priority type ", typeof priority);
+  console.log(!["Low", "Medium", "High"].includes(priority));
   if (
     typeof priority !== "string" ||
     !["Low", "Medium", "High"].includes(priority)
-  )
+  ) {
+    console.log("Hello form if");
     return {
       field: "priority",
       message: "priority must be either of Low, Medium or High",
     };
+  }
 
   return null;
 };
+
 export const descriptionValidator = (description) => {
   if (description.length < 3)
     return {
@@ -30,7 +36,7 @@ export const descriptionValidator = (description) => {
   return null;
 };
 
-export const todoValidator = (data) => {
+export const addTodoValidator = (data) => {
   const errors = [];
 
   if (!data.status || !data.description || !data.priority)
@@ -48,7 +54,7 @@ export const todoValidator = (data) => {
   return errors.length > 0 ? { error: { details: errors } } : {};
 };
 
-export const updateTodoValidator = (data) => {
+export const todoFieldValidator = (data) => {
   const errors = [];
 
   if (data.status) {
@@ -66,7 +72,7 @@ export const updateTodoValidator = (data) => {
     if (priorityError) errors.push(priorityError);
   }
 
-  return errors.length > 0 ? { errors: { details: errors } } : {};
+  return errors.length > 0 ? { error: { details: errors } } : {};
 };
 
 export const indexValidator = ({ index }) => {
