@@ -15,15 +15,12 @@ import {
 const route = Router();
 
 route.get("/allTodos", validatorMiddleware([todoFieldValidator]), getAllTodos);
-
 route.post("/addTodo", validatorMiddleware([addTodoValidator]), addTodo);
-
 route.delete(
   "/removeTodo/:index",
   validatorMiddleware([indexValidator]),
   removeTodo
 );
-
 route.put(
   "/updateTodo/:index",
   validatorMiddleware([indexValidator, todoFieldValidator]),

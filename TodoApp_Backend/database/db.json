@@ -85,27 +85,6 @@
   },
   {
     "description": "new test todo 5",
-    "priority": "High",
-    "status": "Complete",
-    "index": 14,
-    "id": "de6b2987-a70b-4628-80a7-5fcb22d71046"
-  },
-  {
-    "description": "new test todo 5",
-    "priority": 1,
-    "status": "ic",
-    "index": 14,
-    "id": "842d9a5a-2e2e-458b-90dd-558b22eb82ea"
-  },
-  {
-    "description": "new test todo 5",
-    "priority": 1,
-    "status": "ic",
-    "index": 15,
-    "id": "c4907cbf-2a88-4104-8a29-66ca16010402"
-  },
-  {
-    "description": "new test todo 5",
     "priority": "Low",
     "status": "Complete",
     "index": 16,

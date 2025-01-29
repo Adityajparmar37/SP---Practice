@@ -63,7 +63,7 @@ export const removeTodoLogic = async (index) => {
   if (!success) return { success: false, message: "No Todos Found" };
 
   const todoIndex = getDataIndex(allTodosData, parseInt(index), "index");
-  if (todoIndex === -1) return { success: false, message: "Todo Not Found" };
+  if (todoIndex === -1) return { success: false, message: "Todo does not exist" };
 
   let todoListAfterRemove = removeData(allTodosData, parseInt(index), "index");
 

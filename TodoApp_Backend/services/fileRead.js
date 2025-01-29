@@ -12,12 +12,10 @@ export const ReadTodosFromFile = async () => {
     const filePath = path.join(__dirname, "../database/db.json");
     const data = await fsProm.readFile(filePath, "utf-8");
 
-    // if file is empty
     if (!data.trim()) {
       return { success: true, allTodosData: [] };
     }
 
-    // if file has data
     return { success: true, allTodosData: JSON.parse(data) };
   } catch (error) {
     return { success: false, erroe: error.message };

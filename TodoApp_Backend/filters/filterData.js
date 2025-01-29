@@ -7,9 +7,5 @@ export const filterData = (data, filterValue, filterField) => {
   } else if (filterField === "status") {
     filterType = statusMapping.get(filterValue);
   }
-
-  if (filterType === undefined)
-    throw new Error(`Invalid ${filterField} value provided: ${filterValue}`);
-
   return data.filter((element) => element[filterField] === filterType);
 };
