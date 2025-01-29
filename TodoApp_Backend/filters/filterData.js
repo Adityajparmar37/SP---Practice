@@ -2,10 +2,10 @@ import { priorityMapping, statusMapping } from "../utils/constant.js";
 
 export const filterData = (data, filterValue, filterField) => {
   let filterType;
-  if (filterField === "status") {
-    filterType = statusMapping[filterValue];
-  } else if (filterField === "priority") {
-    filterType = priorityMapping[filterValue];
+  if (filterField === "priority") {
+    filterType = priorityMapping.get(filterValue);
+  } else if (filterField === "status") {
+    filterType = statusMapping.get(filterValue);
   }
 
   if (filterType === undefined)

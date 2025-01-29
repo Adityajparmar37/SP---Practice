@@ -1,8 +1,8 @@
 export const statusValidator = (status) => {
-  if (typeof status !== "string" || !["Not Done", "Done"].includes(status))
+  if (typeof status !== "string" || !["Incomplete", "Complete"].includes(status))
     return {
       field: "status",
-      message: "status must be either of Not Done or Done",
+      message: "status must be either of Incomplete or Complete",
     };
 
   return null;
