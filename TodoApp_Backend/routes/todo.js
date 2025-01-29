@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { addTodo, getAllTodos, removeTodo, updateTodo } from "../controller/todo.controller.js";
 import {validatorMiddleware } from "../middleware/validator.middleware.js";
-import {todoValidator, updateTodoValidator} from "../validator/todo.validator.js"
+import {todoValidator, updateTodoValidator} from "../validator/todo.js"
 
 
 const route = Router();
