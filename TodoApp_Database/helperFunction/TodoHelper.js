@@ -11,35 +11,43 @@ import {
   reverseStatusMapping,
   statusMapping,
 } from "../utils/constant.js";
+import { addTodoToDb, findTodosDb } from "../querys/todoQuerys.js";
 
-export const getAllTodosLogic = async ({ sort, status, priority }) => {
-  const { success, allTodosData } = await ReadTodosFromFile();
-  if (!success || allTodosData.length === 0)
+export const getAllTodosLogic = async (filter) => {
+  let { status, priority, sort } = filter;
+  if (priority) {
+    priority = priorityMapping.get(priority);
+  }
+  if (status) {
+    status = statusMapping.get(status);
+  }
+
+  Object.assign(filter, {
+    priority,
+    status,
+  });
+
+  let allTodosData = await findTodosDb(filter);
+  if (allTodosData.length === 0)
     return { success: false, message: "No Todos Found" };
-
-  let filterTodos = allTodosData;
-  if (status) filterTodos = filterData(filterTodos, status, "status");
-  if (priority) filterTodos = filterData(filterTodos, priority, "priority");
-  if (sort) sortData(filterTodos, sort, "index");
-
-  filterTodos = filterTodos.map((todo) => ({
+  allTodosData = allTodosData.map((todo) => ({
     ...todo,
     priority: reversePriorityMapping.get(todo.priority),
     status: reverseStatusMapping.get(todo.status),
   }));
-  return { success: true, filterTodos };
+  console.log(allTodosData);
+  return { success: true, AllTodo: allTodosData };
 };
 
 export const addTodoLogic = async (newTodoData) => {
-  const { success, allTodosData } = await ReadTodosFromFile();
-  if (!success) return res.status(400).json({ message: "No Todos Found" });
-
   Object.assign(newTodoData, {
-    index: allTodosData.length + 1,
     id: createId(),
     status: statusMapping.get(newTodoData.status),
     priority: priorityMapping.get(newTodoData.priority),
   });
+
+  const { success, allTodosData } = await addTodoToDb();
+  if (!success) return res.status(400).json({ message: "No Todos Found" });
 
   allTodosData.push(newTodoData);
 
@@ -63,7 +71,8 @@ export const removeTodoLogic = async (index) => {
   if (!success) return { success: false, message: "No Todos Found" };
 
   const todoIndex = getDataIndex(allTodosData, parseInt(index), "index");
-  if (todoIndex === -1) return { success: false, message: "Todo does not exist" };
+  if (todoIndex === -1)
+    return { success: false, message: "Todo does not exist" };
 
   let todoListAfterRemove = removeData(allTodosData, parseInt(index), "index");
 

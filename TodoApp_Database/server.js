@@ -1,14 +1,14 @@
-import app from "./app.js"
-import { connectDB } from "./database/dbconnect.js";
+import express from "express";
+import TodoAPI from "./routes/todo.js";
+
+const app = express();
 const PORT = process.env.PORT;
 
-connectDB()
-  .then(() =>
-    app.listen(PORT, (error) => {
-      if (error) {
-        return console.log("Error in starting server ", error);
-      }
-      console.log(`Server Listeing on ${PORT}`);
-    })
-  )
-  .catch((error) => console.log("Error connecting in db ", error));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use("/api/todos", TodoAPI);
+
+app.listen(PORT, () => {
+  console.log(`Server Listeing on ${PORT}`);
+});

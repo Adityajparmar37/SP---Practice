@@ -10,9 +10,7 @@ export const getAllTodos = handleAsync(async (req, res, next) => {
   const filters = req.query;
   const result = await getAllTodosLogic(filters);
   if (!result.success) return res.status(400).json({ message: result.message });
-  res
-    .status(200)
-    .json({ message: "All Todos", AllTodosData: result.filterTodos });
+  res.status(200).json({ message: "All Todos", AllTodo: result.AllTodo });
 });
 
 export const addTodo = handleAsync(async (req, res, next) => {
