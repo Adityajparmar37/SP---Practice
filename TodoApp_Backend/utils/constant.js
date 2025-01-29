@@ -6,7 +6,7 @@ export const priorityMapping = {
 
 export const statusMapping = {
     D: "Done",
-    ND: "Non Done"
+    ND: "Not Done"
 }
 
 export const sortMapping = {

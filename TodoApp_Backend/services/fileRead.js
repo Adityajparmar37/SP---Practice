@@ -10,7 +10,6 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export const ReadTodosFromFile = async () => {
     try {
-        // console.log("Inside File Read")
         const filePath = path.join(__dirname, "../database/db.json");
         const data = await fsProm.readFile(filePath, "utf-8");
         

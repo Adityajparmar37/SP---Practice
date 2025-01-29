@@ -6,7 +6,6 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export const WriteToDosFromFile = async (data) => {
     try {
-        // console.log("Write data", data)
         const filePath = path.join(__dirname, "../database/db.json");
         await fsProm.writeFile(filePath, JSON.stringify(data, null, 2));
         return {success:true}

@@ -27,11 +27,9 @@ export const addTodo = handleAsync(async (req, res, next) => {
 
 
 
-export const removeTodo = handleAsync(async (req, res, next) => {
-    const TodoIndex = req.params.index;
-    if(!TodoIndex) return res.status(400).json({ message: "Please choose a Todo to delete"});
-   
-    const result = await removeTodoLogic(TodoIndex);
+export const removeTodo = handleAsync(async (req, res, next) => {   
+    const index = req.params.index;
+    const result = await removeTodoLogic(index);
 
     if (!result.success) return res.status(400).json({ message: result.message });
     res.status(200).json({ message: result.message });

@@ -10,7 +10,7 @@ export const filterData = (data, filterValue, filterField) => {
         filterType = statusMapping[filterValue]
     }
     else if (filterField === "priority") {
-        console.log("priority")
+        // console.log("priority")
         filterType = priorityMapping[filterValue]
     }
 

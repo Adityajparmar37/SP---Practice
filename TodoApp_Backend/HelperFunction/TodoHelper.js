@@ -36,14 +36,15 @@ export const addTodoLogic = async (newTodoData) => {
         : { success: false, message: "Todo Not Added, please try again" }
 }
 
-export const removeTodoLogic = async (TodoIndex) => {
+export const removeTodoLogic = async (index) => {
+    console.log("index", index)
     const { success, allTodosData } = await ReadTodosFromFile();
     if (!success) return { success: false, message: "No Todos Found" };
 
-    const todoIndex = getDataIndex(allTodosData, parseInt(TodoIndex), "index")
+    const todoIndex = getDataIndex(allTodosData, parseInt(index), "index")
     if (todoIndex === -1) return { success: false, message: "Todo Not Found" }
     
-    let tempTodoListData = removeData(allTodosData, parseInt(TodoIndex), "index");
+    let tempTodoListData = removeData(allTodosData, parseInt(index), "index");
     const response = await WriteToDosFromFile(tempTodoListData);
 
     return response.success 
@@ -52,12 +53,11 @@ export const removeTodoLogic = async (TodoIndex) => {
 }
 
 
-export const updateTodoLogic = async (TodoIndex, upateTodoData) => {
+export const updateTodoLogic = async (index, upateTodoData) => {
     const { success, allTodosData } = await ReadTodosFromFile();
     if (!success) return { success: false, message: "No Todos Found" };
 
-    const todoUpdateIndex = getDataIndex(allTodosData, parseInt(TodoIndex), "index")
-    console.log(todoUpdateIndex)
+    const todoUpdateIndex = getDataIndex(allTodosData, parseInt(index), "index")
     if (todoUpdateIndex === -1) return { success: false, message: "Todo Not Found" };
 
     allTodosData[todoUpdateIndex] = { ...allTodosData[todoUpdateIndex], ...upateTodoData };
