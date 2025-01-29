@@ -14,7 +14,6 @@ import {
 
 export const getAllTodosLogic = async ({ sort, status, priority }) => {
   const { success, allTodosData } = await ReadTodosFromFile();
-
   if (!success || allTodosData.length === 0)
     return { success: false, message: "No Todos Found" };
 
@@ -45,16 +44,17 @@ export const addTodoLogic = async (newTodoData) => {
   allTodosData.push(newTodoData);
 
   Object.assign(newTodoData, {
-    index: allTodosData.length + 1,
-    id: createId(),
     status: reverseStatusMapping.get(newTodoData.status),
     priority: reversePriorityMapping.get(newTodoData.priority),
   });
 
   const response = await WriteToDosFromFile(allTodosData);
-
   return response.success
-    ? { success: true, message: "Todo Addedd Successfully", newTodoData }
+    ? {
+        success: true,
+        message: "Todo Addedd Successfully",
+        newTodoData,
+      }
     : { success: false, message: "Todo Not Added, please try again" };
 };
 
@@ -65,9 +65,9 @@ export const removeTodoLogic = async (index) => {
   const todoIndex = getDataIndex(allTodosData, parseInt(index), "index");
   if (todoIndex === -1) return { success: false, message: "Todo Not Found" };
 
-  let tempTodoListData = removeData(allTodosData, parseInt(index), "index");
-  const response = await WriteToDosFromFile(tempTodoListData);
+  let todoListAfterRemove = removeData(allTodosData, parseInt(index), "index");
 
+  const response = await WriteToDosFromFile(todoListAfterRemove);
   return response.success
     ? { success: true, message: "Todo Removed Successfully" }
     : { success: false, message: "Todo Not Removed, please try again" };
