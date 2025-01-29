@@ -21,12 +21,16 @@ export const getAllTodosLogic = async (filters) => {
   return { success: true, filterTodos };
 };
 
+
 export const addTodoLogic = async (newTodoData) => {
   const { success, allTodosData } = await ReadTodosFromFile();
   if (!success) return res.status(400).json({ message: "No Todos Found" });
 
-  newTodoData.index = allTodosData.length + 1;
-  newTodoData.id = createId();
+  Object.assign(newTodoData, {
+    index: allTodosData.length + 1,
+    id: createId()
+  })
+
   allTodosData.push(newTodoData);
   const response = await WriteToDosFromFile(allTodosData);
 
@@ -34,6 +38,7 @@ export const addTodoLogic = async (newTodoData) => {
     ? { success: true, message: "Todo Addedd Successfully", newTodoData }
     : { success: false, message: "Todo Not Added, please try again" };
 };
+
 
 export const removeTodoLogic = async (index) => {
   console.log("index", index);
@@ -50,6 +55,7 @@ export const removeTodoLogic = async (index) => {
     ? { success: true, message: "Todo Removed Successfully" }
     : { success: false, message: "Todo Not Removed, please try again" };
 };
+
 
 export const updateTodoLogic = async (index, upateTodoData) => {
   const { success, allTodosData } = await ReadTodosFromFile();

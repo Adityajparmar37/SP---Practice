@@ -8,6 +8,7 @@ export const statusValidator = (status) => {
   return null;
 };
 export const priorityValidator = (priority) => {
+  console.log("priority", priority);
   if (
     typeof priority !== "string" ||
     !["Low", "Medium", "High"].includes(priority)
