@@ -3,42 +3,42 @@
     "_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
     "description": "Buy groceries",
     "priority": 1,
-    "status": "ic"
+    "status": "complete"
   },
   {
     "_id": "1c5ef6c4-8aaf-451b-93a1-1e40b6d8b28b",
     "description": "Dinesy Land",
     "priority": 2,
-    "status": "ic"
+    "status": "in_complete"
   },
   {
     "_id": "7cda27f6-128e-4834-b8d8-872ca5d94875",
     "description": "Schedule meeting with team",
     "priority": 3,
-    "status": "c"
+    "status": "complete"
   },
   {
     "_id": "c2b1ec7b-b0d4-48d1-9fdc-8f5c97a2a7d5",
     "description": "Meeting with CEO",
     "priority": "Low",
-    "status": "ic"
+    "status": "in_complete"
   },
   {
     "_id": "f1e47e98-d4af-46c4-bc65-2839ae16c7b2",
     "description": "Plan weekend trip",
     "priority": 3,
-    "status": "c"
+    "status": "complete"
   },
   {
     "_id": "c81681a7-bd71-47f3-9135-55acedc88a2d",
     "description": "Holiday trip",
     "priority": 3,
-    "status": "c"
+    "status": "complete"
   },
   {
-    "__id": "e0f218ab-681d-4f59-801f-bcce279eb8ab",
+    "_id": "e0f218ab-681d-4f59-801f-bcce279eb8ab",
     "description": "Company",
     "priority": 1,
-    "status": "ic"
+    "status": "in_complete"
   }
 ]

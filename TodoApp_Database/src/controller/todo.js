@@ -23,16 +23,16 @@ export const addTodo = handleAsync(async (req, res, next) => {
 });
 
 export const removeTodo = handleAsync(async (req, res, next) => {
-  const TodoIndex = req.params.index;
-  const result = await removeTodoLogic(TodoIndex);
+  const todoId = req.params.todoId;
+  const result = await removeTodoLogic(todoId);
   if (!result.success) return res.status(400).json({ message: result.message });
   res.status(200).json({ message: result.message });
 });
 
 export const updateTodo = handleAsync(async (req, res) => {
-  const TodoIndex = req.params.index;
+  const todoId = req.params.todoId;
   const upateTodoData = req.body;
-  const result = await updateTodoLogic(TodoIndex, upateTodoData);
+  const result = await updateTodoLogic(todoId, upateTodoData);
   if (!result.success) return res.status(400).json({ message: result.message });
   res
     .status(200)
