@@ -93,3 +93,13 @@ export const todoIdValidator = ({ todoId }) => {
   }
   return errors.length > 0 ? { error: { details: errors } } : {};
 };
+
+export const updateTodoData = (data) => {
+  const errors = [];
+  if (!data.description && !data.status && !data.priority)
+    errors.push({
+      field: "Update Todo",
+      message: "Please provide data to update.",
+    });
+  return errors.length > 0 ? { error: { details: errors } } : {};
+};

@@ -22,11 +22,9 @@ export const getAllTodosLogic = async (filter) => {
   otherFilter.status
     ? (otherFilter.status = statusMapping.get(otherFilter.status))
     : (otherFilter.status = null);
-
   const sortOrder = sort ? sortMapping.get(sort) : 1;
 
   let allTodosData = await findTodoDb(otherFilter, sortOrder);
-
   if (allTodosData.length === 0)
     return { success: false, message: "No Todos Found" };
 
@@ -69,23 +67,24 @@ export const removeTodoLogic = async (todoId) => {
     : { success: false, message: "Todo Not Removed, please try again" };
 };
 
-//remove todo
+//update todo
 export const updateTodoLogic = async (todoId, updateTodoData) => {
   const filter = { _id: todoId };
   let isTodoIdExist = await findTodoDb(filter);
   if (isTodoIdExist.length === 0)
     return { success: false, message: "Todo does not exist" };
 
-  if (updateTodoData.priority) {
-    updateTodoData.priority = priorityMapping.get(updateTodoData.priority);
-  }
+  updateTodoData.priority
+    ? (updateTodoData.priority = priorityMapping.get(updateTodoData.priority))
+    : updateTodoData.priority;
 
-  if (updateTodoData.status) {
-    updateTodoData.status = statusMapping.get(updateTodoData.status);
-  }
+  updateTodoData.status
+    ? (updateTodoData.status = statusMapping.get(updateTodoData.status))
+    : updateTodoData.priority;
+
   const dbResponse = await updateTodoDb(todoId, updateTodoData);
   console.log(dbResponse);
-  return dbResponse.upsertedCount > 0
+  return dbResponse.modifiedCount > 0
     ? {
         success: true,
         message: "Todo updated successfully",

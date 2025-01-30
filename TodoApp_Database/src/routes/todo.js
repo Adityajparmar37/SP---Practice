@@ -11,6 +11,7 @@ import {
   priorityValidator,
   statusValidator,
   todoIdValidator,
+  updateTodoData,
 } from "../validator/todo.js";
 
 const route = Router();
@@ -44,6 +45,7 @@ route.delete(
 route.put(
   "/updateTodo/:todoId",
   validator([
+    updateTodoData,
     todoIdValidator,
     statusValidator,
     priorityValidator,
