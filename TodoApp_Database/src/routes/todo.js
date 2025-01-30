@@ -5,7 +5,7 @@ import {
   removeTodo,
   updateTodo,
 } from "../controller/todo.js";
-import { validatorMiddleware } from "../middleware/validatorMiddleware.js";
+import { validator } from "../middleware/validator.js";
 import {
   descriptionValidator,
   priorityValidator,
@@ -17,7 +17,7 @@ const route = Router();
 
 route.get(
   "/allTodos",
-  validatorMiddleware([
+  validator([
     statusValidator,
     priorityValidator,
     descriptionValidator,
@@ -27,7 +27,7 @@ route.get(
 
 route.post(
   "/addTodo",
-  validatorMiddleware([
+  validator([
     statusValidator,
     priorityValidator,
     descriptionValidator,
@@ -37,13 +37,13 @@ route.post(
 
 route.delete(
   "/removeTodo/:todoId",
-  validatorMiddleware([todoIdValidator]),
+  validator([todoIdValidator]),
   removeTodo
 );
 
 route.put(
   "/updateTodo/:todoId",
-  validatorMiddleware([
+  validator([
     todoIdValidator,
     statusValidator,
     priorityValidator,

@@ -1,4 +1,4 @@
-export const validatorMiddleware = (validators) => (req, res, next) => {
+export const validator = (validators) => (req, res, next) => {
   const checkData = { ...req.body, ...req.params, ...req.query };
 
   const errors = [].concat(
