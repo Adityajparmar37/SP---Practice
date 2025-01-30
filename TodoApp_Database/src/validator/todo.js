@@ -1,4 +1,11 @@
-export const statusValidator = (status) => {
+export const statusValidator = (status, url) => {
+  if (url.startsWith("/addTodo") && !status) {
+    return {
+      field: "status",
+      message: "Please provide status",
+    };
+  }
+
   if (
     typeof status !== "string" ||
     !["Incomplete", "Complete"].includes(status)
@@ -20,6 +27,13 @@ export const sortValidator = (sort) => {
 };
 
 export const priorityValidator = (priority) => {
+  if (url.startsWith("/addTodo") && !priority) {
+    return {
+      field: "status",
+      message: "Please provide status",
+    };
+  }
+
   if (
     typeof priority !== "string" ||
     !["Low", "Medium", "High"].includes(priority)
@@ -34,6 +48,13 @@ export const priorityValidator = (priority) => {
 };
 
 export const descriptionValidator = (description) => {
+  if (url.startsWith("/addTodo") && !description) {
+    return {
+      field: "status",
+      message: "Please provide status",
+    };
+  }
+
   if (description.length < 3)
     return {
       field: "description",
