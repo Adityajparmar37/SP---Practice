@@ -1,28 +1,17 @@
 import { MongoClient } from "mongodb";
 const mongoUrl = process.env.MONGO_URL;
-const dbClient = new MongoClient(mongoUrl);
+const client = new MongoClient(mongoUrl);
 
-let dbInstance = null;
 const connectDb = async () => {
   try {
-    if (!dbInstance) {
-      dbInstance = await dbClient.connect();
-      console.log("connected to db");
-      return dbInstance;
-    }
-    return dbInstance;
+    await client.connect();
+    console.log("connected to db");
   } catch (error) {
-    dbInstance = null;
-    dbInstance.close();
     console.log("Error Connection db ", error);
+
+    //doubt can i do this
+    process.exit(0);
   }
 };
 
-const getDbInstance = async () => {
-  if (!dbInstance) {
-    dbInstance = await connectDb();
-  }
-  return dbInstance;
-};
-
-export { connectDb, getDbInstance };
+export { connectDb, client };
