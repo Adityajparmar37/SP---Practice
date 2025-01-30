@@ -4,7 +4,7 @@ import {
   getAllTodosLogic,
   removeTodoLogic,
   updateTodoLogic,
-} from "../helperFunction/TodoHelper.js";
+} from "../../helper/todo.js";
 
 export const getAllTodos = handleAsync(async (req, res, next) => {
   const filters = req.query;

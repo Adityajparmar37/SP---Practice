@@ -1,17 +1,15 @@
 import { ReadTodosFromFile } from "../services/fileRead.js";
 import { WriteToDosFromFile } from "../services/fileWrite.js";
-import { sortData } from "../filters/sortData.js";
-import { filterData } from "../filters/filterData.js";
-import { removeData } from "../filters/removeData.js";
-import { createId } from "../utils/createId.js";
-import { getDataIndex } from "../filters/getdataIndex.js";
+import { removeData } from ".././utils/removeData.js";
+import { getDataIndex } from ".././utils/getdataIndex.js";
+import { createId } from ".././utils/createId.js";
 import {
   priorityMapping,
   reversePriorityMapping,
   reverseStatusMapping,
   statusMapping,
-} from "../utils/constant.js";
-import { addTodoToDb, findTodosDb } from "../querys/todoQuerys.js";
+} from ".././utils/constant.js";
+import { addTodoToDb, findTodosDb } from "../src/query/todo.js";
 
 export const getAllTodosLogic = async (filter) => {
   let { status, priority, sort } = filter;
@@ -40,6 +38,7 @@ export const getAllTodosLogic = async (filter) => {
 };
 
 export const addTodoLogic = async (newTodoData) => {
+  const addTodo = newTodoData;
   Object.assign(newTodoData, {
     id: createId(),
     status: statusMapping.get(newTodoData.status),
@@ -50,18 +49,12 @@ export const addTodoLogic = async (newTodoData) => {
   if (!success) return res.status(400).json({ message: "No Todos Found" });
 
   allTodosData.push(newTodoData);
-
-  Object.assign(newTodoData, {
-    status: reverseStatusMapping.get(newTodoData.status),
-    priority: reversePriorityMapping.get(newTodoData.priority),
-  });
-
   const response = await WriteToDosFromFile(allTodosData);
   return response.success
     ? {
         success: true,
         message: "Todo Addedd Successfully",
-        newTodoData,
+        addTodo,
       }
     : { success: false, message: "Todo Not Added, please try again" };
 };
