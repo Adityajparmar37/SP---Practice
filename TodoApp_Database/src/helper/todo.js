@@ -7,24 +7,24 @@ import {
   statusMapping,
 } from ".././utils/constant.js";
 import {
-  addTodoDb,
-  findTodoDb,
-  removeTodoDb,
-  updateTodoDb,
+  addTodo,
+  findTodo,
+  removeTodo,
+  updateTodo,
 } from "../query/todo.js";
 
 //Get all todo
-export const getAllTodosLogic = async (filter) => {
+export const fetchTodosData = async (filter) => {
   let { sort, ...otherFilter } = filter;
   otherFilter.priority
     ? (otherFilter.priority = priorityMapping.get(otherFilter.priority))
-    : (otherFilter.priority = null);
+    : (otherFilter.priority);
   otherFilter.status
     ? (otherFilter.status = statusMapping.get(otherFilter.status))
-    : (otherFilter.status = null);
+    : (otherFilter.status);
   const sortOrder = sort ? sortMapping.get(sort) : 1;
 
-  let allTodosData = await findTodoDb(otherFilter, sortOrder);
+  let allTodosData = await findTodo(otherFilter, sortOrder);
   if (allTodosData.length === 0)
     return { success: false, message: "No Todos Found" };
 
@@ -37,40 +37,40 @@ export const getAllTodosLogic = async (filter) => {
 };
 
 //add todo
-export const addTodoLogic = async (newTodoData) => {
-  const addTodo = newTodoData;
+export const createNewTodo = async (newTodoData) => {
+  const newTodo = newTodoData;
   Object.assign(newTodoData, {
     _id: createId(),
     status: statusMapping.get(newTodoData.status),
     priority: priorityMapping.get(newTodoData.priority),
   });
 
-  const dbResponse = await addTodoDb(newTodoData);
-  return dbResponse.acknowledged
+  const response = await addTodo(newTodoData);
+  return response.acknowledged
     ? {
         success: true,
         message: "Todo Addedd Successfully",
-        addTodo,
+        newTodo,
       }
     : { success: false, message: "Todo Not Added, please try again" };
 };
 
 //remove todo
-export const removeTodoLogic = async (todoId) => {
-  let isTodoIdExist = await findTodoDb({ _id: todoId });
+export const deleteTodo = async (todoId) => {
+  let isTodoIdExist = await findTodo({ _id: todoId });
   if (isTodoIdExist.length === 0)
     return { success: false, message: "Todo does not exist" };
 
-  const dbResponse = await removeTodoDb(todoId);
-  return dbResponse.acknowledged
+  const response = await removeTodo(todoId);
+  return response.acknowledged
     ? { success: true, message: "Todo Removed Successfully" }
     : { success: false, message: "Todo Not Removed, please try again" };
 };
 
 //update todo
-export const updateTodoLogic = async (todoId, updateTodoData) => {
+export const updateTodoData = async (todoId, updateTodoData) => {
   const filter = { _id: todoId };
-  let isTodoIdExist = await findTodoDb(filter);
+  let isTodoIdExist = await findTodo(filter);
   if (isTodoIdExist.length === 0)
     return { success: false, message: "Todo does not exist" };
 
@@ -82,9 +82,8 @@ export const updateTodoLogic = async (todoId, updateTodoData) => {
     ? (updateTodoData.status = statusMapping.get(updateTodoData.status))
     : updateTodoData.priority;
 
-  const dbResponse = await updateTodoDb(todoId, updateTodoData);
-  console.log(dbResponse);
-  return dbResponse.modifiedCount > 0
+  const response = await updateTodo(todoId, updateTodoData);
+  return response.modifiedCount > 0
     ? {
         success: true,
         message: "Todo updated successfully",

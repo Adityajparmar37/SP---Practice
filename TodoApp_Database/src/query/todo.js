@@ -1,7 +1,6 @@
 import { client } from "../../config/connectDb.js";
 
-export const findTodoDb = async (filter, sortOrder = 1) => {
-  // console.log(filter);
+export const findTodo = async (filter, sortOrder = 1) => {
   const result = await client
     .db("todoDb")
     .collection("todos")
@@ -11,12 +10,12 @@ export const findTodoDb = async (filter, sortOrder = 1) => {
   return result;
 };
 
-export const addTodoDb = async (data) => {
-  const result = await client.db("todoDb").collection("todos").insertMany(data);
+export const addTodo = async (data) => {
+  const result = await client.db("todoDb").collection("todos").insertOne(data);
   return result;
 };
 
-export const removeTodoDb = async (todoId) => {
+export const removeTodo = async (todoId) => {
   const result = await client
     .db("todoDb")
     .collection("todos")
@@ -24,7 +23,7 @@ export const removeTodoDb = async (todoId) => {
   return result;
 };
 
-export const updateTodoDb = async (todoId, updateTodoData) => {
+export const updateTodo = async (todoId, updateTodoData) => {
   const result = await client
     .db("todoDb")
     .collection("todos")

@@ -1,7 +1,7 @@
 import { Router } from "express";
 import {
-  addTodo,
-  getAllTodos,
+  addnewTodo,
+  getTodos,
   removeTodo,
   updateTodo,
 } from "../controller/todo.js";
@@ -23,17 +23,13 @@ route.get(
     priorityValidator,
     descriptionValidator,
   ]),
-  getAllTodos
+  getTodos
 );
 
 route.post(
   "/addTodo",
-  validator([
-    statusValidator,
-    priorityValidator,
-    descriptionValidator,
-  ]),
-  addTodo
+  validator([statusValidator, priorityValidator, descriptionValidator]),
+  addnewTodo
 );
 
 route.delete(

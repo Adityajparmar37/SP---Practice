@@ -1,21 +1,21 @@
 import { handleAsync } from "../middleware/handleAsync.js";
 import {
-  addTodoLogic,
-  getAllTodosLogic,
-  removeTodoLogic,
-  updateTodoLogic,
-} from "../helper/todo.js"
+  createNewTodo,
+  fetchTodosData,
+  deleteTodo,
+  updateTodoData,
+} from "../helper/todo.js";
 
-export const getAllTodos = handleAsync(async (req, res, next) => {
+export const getTodos = handleAsync(async (req, res, next) => {
   const filters = req.query;
-  const result = await getAllTodosLogic(filters);
+  const result = await fetchTodosData(filters);
   if (!result.success) return res.status(400).json({ message: result.message });
   res.status(200).json({ message: "All Todos", AllTodo: result.AllTodo });
 });
 
-export const addTodo = handleAsync(async (req, res, next) => {
+export const addnewTodo = handleAsync(async (req, res, next) => {
   const newTodoData = req.body;
-  const result = await addTodoLogic(newTodoData);
+  const result = await createNewTodo(newTodoData);
   if (!result.success) return res.status(400).json({ message: result.message });
   res
     .status(200)
@@ -24,7 +24,7 @@ export const addTodo = handleAsync(async (req, res, next) => {
 
 export const removeTodo = handleAsync(async (req, res, next) => {
   const todoId = req.params.todoId;
-  const result = await removeTodoLogic(todoId);
+  const result = await deleteTodo(todoId);
   if (!result.success) return res.status(400).json({ message: result.message });
   res.status(200).json({ message: result.message });
 });
@@ -32,7 +32,7 @@ export const removeTodo = handleAsync(async (req, res, next) => {
 export const updateTodo = handleAsync(async (req, res) => {
   const todoId = req.params.todoId;
   const upateTodoData = req.body;
-  const result = await updateTodoLogic(todoId, upateTodoData);
+  const result = await updateTodoData(todoId, upateTodoData);
   if (!result.success) return res.status(400).json({ message: result.message });
   res
     .status(200)
