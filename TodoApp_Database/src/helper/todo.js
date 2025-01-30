@@ -1,5 +1,5 @@
-import { ReadTodosFromFile } from "../services/fileRead.js";
-import { WriteToDosFromFile } from "../services/fileWrite.js";
+import { ReadTodosFromFile } from "../../services/fileRead.js";
+import { WriteToDosFromFile } from "../../services/fileWrite.js";
 import { removeData } from ".././utils/removeData.js";
 import { getDataIndex } from ".././utils/getdataIndex.js";
 import { createId } from ".././utils/createId.js";
@@ -9,7 +9,7 @@ import {
   reverseStatusMapping,
   statusMapping,
 } from ".././utils/constant.js";
-import { addTodoToDb, findTodosDb } from "../src/query/todo.js";
+import { addTodoToDb, findTodosDb } from "../query/todo.js";
 
 export const getAllTodosLogic = async (filter) => {
   let { status, priority, sort } = filter;
