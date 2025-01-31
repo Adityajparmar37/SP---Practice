@@ -17,7 +17,7 @@ import {
 const route = Router();
 
 route.get(
-  "/allTodos",
+  "/",
   validator([
     statusValidator,
     priorityValidator,
@@ -27,19 +27,19 @@ route.get(
 );
 
 route.post(
-  "/addTodo",
+  "/",
   validator([statusValidator, priorityValidator, descriptionValidator]),
   addnewTodo
 );
 
 route.delete(
-  "/removeTodo/:todoId",
+  "/:todoId",
   validator([todoIdValidator]),
   removeTodo
 );
 
 route.put(
-  "/updateTodo/:todoId",
+  "/:todoId",
   validator([
     updateTodoData,
     todoIdValidator,

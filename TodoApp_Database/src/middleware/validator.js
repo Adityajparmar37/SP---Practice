@@ -1,10 +1,10 @@
 export const validator = (validators) => (req, res, next) => {
   const checkData = { ...req.body, ...req.params, ...req.query };
-  const url = req.url;
+  const method = req.method;
 
   const errors = [].concat(
     ...validators.map(
-      (validator) => validator(checkData, url)?.error?.details || []
+      (validator) => validator(checkData, method)?.error?.details || []
     )
   );
 

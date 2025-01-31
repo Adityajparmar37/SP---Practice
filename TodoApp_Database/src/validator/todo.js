@@ -1,8 +1,8 @@
 import { isTodoIdValid } from "../shared/todoId.js";
 
-export const statusValidator = (data, url) => {
+export const statusValidator = (data, method) => {
   const errors = [];
-  if (url.startsWith("/addTodo") && !data.status) {
+  if (method === "POST" && !data.status) {
     errors.push({
       field: "status",
       message: "Please provide a status",
@@ -38,10 +38,10 @@ export const sortValidator = (data) => {
   return errors.length > 0 ? { error: { details: errors } } : {};
 };
 
-export const priorityValidator = (data, url) => {
+export const priorityValidator = (data, method) => {
   const errors = [];
 
-  if (url.startsWith("/addTodo") && !data.priority) {
+  if (method === "POST" && !data.priority) {
     errors.push({
       field: "priority",
       message: "Please provide a priority",
@@ -62,9 +62,9 @@ export const priorityValidator = (data, url) => {
   return errors.length > 0 ? { error: { details: errors } } : {};
 };
 
-export const descriptionValidator = (data, url) => {
+export const descriptionValidator = (data, method) => {
   const errors = [];
-  if (url.startsWith("/addTodo") && !data.description) {
+  if (method === "POST" && !data.description) {
     errors.push({
       field: "description",
       message: "Please provide a description",
