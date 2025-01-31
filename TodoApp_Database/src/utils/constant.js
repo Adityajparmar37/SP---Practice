@@ -12,8 +12,8 @@ export const statusMapping = new Map([
 ]);
 
 export const sortMapping = new Map([
-  ["ASEC", -1],
-  ["DSEC", 1],
+  ["AESC", -1],
+  ["DESC", 1],
 ]);
 
 export const reverseStatusMapping = reverseMap(statusMapping);

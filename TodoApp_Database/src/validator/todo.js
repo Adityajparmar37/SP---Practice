@@ -1,9 +1,10 @@
-import { isTodoIdValid } from "../shared/todoId.js";
+import { isValidTodoId } from "../shared/todoId.js";
 
-export const statusValidator = (data, method) => {
-  const errors = [];
+export const validateStatus = (data, method) => {
+  const validationErrors = [];
+
   if (method === "POST" && !data.status) {
-    errors.push({
+    validationErrors.push({
       field: "status",
       message: "Please provide a status",
     });
@@ -14,35 +15,40 @@ export const statusValidator = (data, method) => {
     (typeof data.status !== "string" ||
       !["Incomplete", "Complete"].includes(data.status))
   ) {
-    errors.push({
+    validationErrors.push({
       field: "status",
       message: "Status must be either 'Incomplete' or 'Complete'",
     });
   }
 
-  return errors.length > 0 ? { error: { details: errors } } : {};
+  return validationErrors.length > 0
+    ? { error: { details: validationErrors } }
+    : {};
 };
 
-export const sortValidator = (data) => {
-  const errors = [];
+export const validateSortOrder = (data) => {
+  const validationErrors = [];
+
   if (
     data.sort &&
-    (typeof data.sort !== "string" || !["ASEC", "DESC"].includes(data.sort))
+    (typeof data.sort !== "string" || !["AESC", "DESC"].includes(data.sort))
   ) {
-    errors.push({
+    validationErrors.push({
       field: "sort",
-      message: "Sort must be either 'ASEC' or 'DESC'",
+      message: "Sort must be either 'AESC' or 'DESC'",
     });
   }
 
-  return errors.length > 0 ? { error: { details: errors } } : {};
+  return validationErrors.length > 0
+    ? { error: { details: validationErrors } }
+    : {};
 };
 
-export const priorityValidator = (data, method) => {
-  const errors = [];
+export const validatePriority = (data, method) => {
+  const validationErrors = [];
 
   if (method === "POST" && !data.priority) {
-    errors.push({
+    validationErrors.push({
       field: "priority",
       message: "Please provide a priority",
     });
@@ -53,53 +59,70 @@ export const priorityValidator = (data, method) => {
     (typeof data.priority !== "string" ||
       !["Low", "Medium", "High"].includes(data.priority))
   ) {
-    errors.push({
+    validationErrors.push({
       field: "priority",
       message: "Priority must be either 'Low', 'Medium', or 'High'",
     });
   }
 
-  return errors.length > 0 ? { error: { details: errors } } : {};
+  return validationErrors.length > 0
+    ? { error: { details: validationErrors } }
+    : {};
 };
 
-export const descriptionValidator = (data, method) => {
-  const errors = [];
+export const validateDescription = (data, method) => {
+  const validationErrors = [];
+
   if (method === "POST" && !data.description) {
-    errors.push({
+    validationErrors.push({
       field: "description",
       message: "Please provide a description",
     });
   }
 
   if (data.description && data.description.length < 3) {
-    errors.push({
+    validationErrors.push({
       field: "description",
       message: "Description must be at least 3 characters long",
     });
   }
 
-  return errors.length > 0 ? { error: { details: errors } } : {};
+  return validationErrors.length > 0
+    ? { error: { details: validationErrors } }
+    : {};
 };
 
-export const todoIdValidator = ({ todoId }) => {
-  const errors = [];
+export const validateTodoId = ({ todoId }) => {
+  const validationErrors = [];
+
   if (!todoId) {
-    errors.push({ field: "todoId", message: "Please provide Todo Id." });
-  } else if (!isTodoIdValid(todoId)) {
-    errors.push({
+    validationErrors.push({
+      field: "todoId",
+      message: "Please provide Todo Id.",
+    });
+  } else if (!isValidTodoId(todoId)) {
+    validationErrors.push({
       field: "todoId",
       message: "Todo Id must be a valid UUID.",
     });
   }
-  return errors.length > 0 ? { error: { details: errors } } : {};
+
+  return validationErrors.length > 0
+    ? { error: { details: validationErrors } }
+    : {};
 };
 
-export const updateTodoData = (data) => {
-  const errors = [];
-  if (!data.description && !data.status && !data.priority)
-    errors.push({
-      field: "Update Todo",
+export const validateUpdateTodoData = (data) => {
+  const validationErrors = [];
+
+  if (!data.description && !data.status && !data.priority) {
+    validationErrors.push({
+      field: "updateTodo",
       message: "Please provide data to update.",
     });
-  return errors.length > 0 ? { error: { details: errors } } : {};
+  }
+
+  return validationErrors.length > 0
+    ? { error: { details: validationErrors } }
+    : {};
 };

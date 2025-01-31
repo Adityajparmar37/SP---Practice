@@ -1,92 +1,109 @@
-import { createId } from ".././utils/createId.js";
+import { generateId } from "../utils/createId.js";
 import {
   priorityMapping,
   reversePriorityMapping,
   reverseStatusMapping,
   sortMapping,
   statusMapping,
-} from ".././utils/constant.js";
+} from "../utils/constant.js";
 import {
-  addTodo,
-  findTodo,
-  removeTodo,
-  updateTodo,
+  insertTodo,
+  findTodos,
+  removeTodoById,
+  updateTodoById,
+  findTodoById,
 } from "../query/todo.js";
 
-//Get all todo
-export const fetchTodosData = async (filter) => {
-  let { sort, ...otherFilter } = filter;
-  otherFilter.priority
-    ? (otherFilter.priority = priorityMapping.get(otherFilter.priority))
-    : (otherFilter.priority);
-  otherFilter.status
-    ? (otherFilter.status = statusMapping.get(otherFilter.status))
-    : (otherFilter.status);
+// Fetch all todos
+export const getAllTodosHandler = async (filters) => {
+  let { sort, ...otherFilters } = filters;
+  if (otherFilters.priority) {
+    otherFilters.priority = priorityMapping.get(otherFilters.priority);
+  }
+  if (otherFilters.status) {
+    otherFilters.status = statusMapping.get(otherFilters.status);
+  }
   const sortOrder = sort ? sortMapping.get(sort) : 1;
 
-  let allTodosData = await findTodo(otherFilter, sortOrder);
-  if (allTodosData.length === 0)
+  let todos = await findTodos(otherFilters, sortOrder);
+  if (todos.length === 0) {
     return { success: false, message: "No Todos Found" };
+  }
 
-  allTodosData = allTodosData.map((todo) => ({
+  todos = todos.map((todo) => ({
     ...todo,
     priority: reversePriorityMapping.get(todo.priority),
     status: reverseStatusMapping.get(todo.status),
   }));
-  return { success: true, AllTodo: allTodosData };
+  return { success: true, todos };
 };
 
-//add todo
-export const createNewTodo = async (newTodoData) => {
-  const newTodo = newTodoData;
-  Object.assign(newTodoData, {
-    _id: createId(),
-    status: statusMapping.get(newTodoData.status),
-    priority: priorityMapping.get(newTodoData.priority),
+// get  todo
+export const getTodoHandler = async (todoId) => {
+  const todo = await findTodoById({ _id: todoId });
+  if (todo.length === 0) {
+    return { success: false, message: "No Todos Found" };
+  }
+
+  Object.assign(todo[0], {
+    priority: reversePriorityMapping.get(todo[0].priority),
+    status: reverseStatusMapping.get(todo[0].status),
+  });
+  return { success: true, todo: todo[0] };
+};
+
+// Create a new todo
+export const createTodoHandler = async (todoData) => {
+  const newTodo = { ...todoData };
+  Object.assign(newTodo, {
+    _id: generateId(),
+    status: statusMapping.get(todoData.status),
+    priority: priorityMapping.get(todoData.priority),
   });
 
-  const response = await addTodo(newTodoData);
+  const response = await insertTodo(newTodo);
   return response.acknowledged
     ? {
         success: true,
-        message: "Todo Addedd Successfully",
-        newTodo,
+        message: "Todo Added Successfully",
       }
-    : { success: false, message: "Todo Not Added, please try again" };
+    : { success: false, message: "Failed to Add Todo, please try again" };
 };
 
-//remove todo
-export const deleteTodo = async (todoId) => {
-  let isTodoIdExist = await findTodo({ _id: todoId });
-  if (isTodoIdExist.length === 0)
-    return { success: false, message: "Todo does not exist" };
+// Remove a todo
+export const deleteTodoHandler = async (todoId) => {
+  const todoExists = await findTodos({ _id: todoId });
+  if (todoExists.length === 0) {
+    return { success: false, message: "Todo not found" };
+  }
 
-  const response = await removeTodo(todoId);
+  const response = await removeTodoById(todoId);
   return response.acknowledged
     ? { success: true, message: "Todo Removed Successfully" }
-    : { success: false, message: "Todo Not Removed, please try again" };
+    : { success: false, message: "Failed to Remove Todo, please try again" };
 };
 
-//update todo
-export const updateTodoData = async (todoId, updateTodoData) => {
+// Update a todo
+export const updateTodoHandler = async (todoId, updatedTodoData) => {
   const filter = { _id: todoId };
-  let isTodoIdExist = await findTodo(filter);
-  if (isTodoIdExist.length === 0)
-    return { success: false, message: "Todo does not exist" };
+  const todoExists = await findTodos(filter);
+  if (todoExists.length === 0) {
+    return { success: false, message: "Todo not found" };
+  }
 
-  updateTodoData.priority
-    ? (updateTodoData.priority = priorityMapping.get(updateTodoData.priority))
-    : updateTodoData.priority;
+  if (updatedTodoData.priority) {
+    updatedTodoData.priority = priorityMapping.get(updatedTodoData.priority);
+  }
 
-  updateTodoData.status
-    ? (updateTodoData.status = statusMapping.get(updateTodoData.status))
-    : updateTodoData.priority;
+  if (updatedTodoData.status) {
+    updatedTodoData.status = statusMapping.get(updatedTodoData.status);
+  }
 
-  const response = await updateTodo(todoId, updateTodoData);
+  const response = await updateTodoById(todoId, updatedTodoData);
   return response.modifiedCount > 0
     ? {
         success: true,
         message: "Todo updated successfully",
       }
-    : { success: false, message: "Todo is same" };
+    : { success: false, message: "No changes made to the Todo" };
 };

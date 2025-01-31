@@ -1,17 +1,19 @@
 import { Router } from "express";
 import {
-  addnewTodo,
-  getTodos,
-  removeTodo,
+  createTodo,
+  getAllTodos,
+  deleteTodo,
   updateTodo,
+  getTodo,
 } from "../controller/todo.js";
 import { validator } from "../middleware/validator.js";
 import {
-  descriptionValidator,
-  priorityValidator,
-  statusValidator,
-  todoIdValidator,
-  updateTodoData,
+  validateDescription,
+  validatePriority,
+  validateSortOrder,
+  validateStatus,
+  validateTodoId,
+  validateUpdateTodoData,
 } from "../validator/todo.js";
 
 const route = Router();
@@ -19,33 +21,32 @@ const route = Router();
 route.get(
   "/",
   validator([
-    statusValidator,
-    priorityValidator,
-    descriptionValidator,
+    validateStatus,
+    validatePriority,
+    validateDescription,
+    validateSortOrder,
   ]),
-  getTodos
+  getAllTodos
 );
+
+route.get("/:todoId", validator([validateTodoId]), getTodo);
 
 route.post(
   "/",
-  validator([statusValidator, priorityValidator, descriptionValidator]),
-  addnewTodo
+  validator([validateStatus, validatePriority, validateDescription]),
+  createTodo
 );
 
-route.delete(
-  "/:todoId",
-  validator([todoIdValidator]),
-  removeTodo
-);
+route.delete("/:todoId", validator([validateTodoId]), deleteTodo);
 
-route.put(
+route.patch(
   "/:todoId",
   validator([
-    updateTodoData,
-    todoIdValidator,
-    statusValidator,
-    priorityValidator,
-    descriptionValidator,
+    validateUpdateTodoData,
+    validateTodoId,
+    validateStatus,
+    validatePriority,
+    validateDescription,
   ]),
   updateTodo
 );
