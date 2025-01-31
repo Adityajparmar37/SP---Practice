@@ -37,7 +37,6 @@ export const getTodo = handleAsync(async (req, res, next) => {
 });
 
 
-
 // @route   POST /api/v1/todos/
 // @desc    create todo
 export const createTodo = handleAsync(async (req, res, next) => {
