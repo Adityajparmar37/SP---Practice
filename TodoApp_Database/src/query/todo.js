@@ -31,13 +31,11 @@ export const updateTodoById = async (todoId, updateTodoData) => {
   return result;
 };
 
-export const findTodoById = async (filter, sortOrder = 1) => {
+export const findTodoById = async (filter) => {
   const result = await client
     .db("todoDb")
     .collection("todos")
-    .find(filter)
-    .sort({ priority: sortOrder })
-    .toArray();
+    .findOne(filter)
   return result;
 };
 

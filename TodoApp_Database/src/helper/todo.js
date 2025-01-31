@@ -45,11 +45,11 @@ export const getTodoHandler = async (todoId) => {
     return { success: false, message: "No Todos Found" };
   }
 
-  Object.assign(todo[0], {
-    priority: reversePriorityMapping.get(todo[0].priority),
-    status: reverseStatusMapping.get(todo[0].status),
+  Object.assign(todo, {
+    priority: reversePriorityMapping.get(todo.priority),
+    status: reverseStatusMapping.get(todo.status),
   });
-  return { success: true, todo: todo[0] };
+  return { success: true, todo };
 };
 
 // Create a new todo
