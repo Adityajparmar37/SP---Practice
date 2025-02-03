@@ -1,11 +1,10 @@
-import express from "express";
-import todoRoute from "./src/routes/todo.js";
+import Koa from "koa";
+import bodyParser from "koa-bodyparser";
+import router from "./src/routes/index.js";
 
-const app = express();
+const app = new Koa();
+app.use(bodyParser());
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(router.routes()).use(router.allowedMethods());
 
-app.use("/api/v1/todos", todoRoute);
-
-export default app
+export default app;

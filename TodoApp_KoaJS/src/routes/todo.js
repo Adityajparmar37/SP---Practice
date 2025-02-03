@@ -1,4 +1,4 @@
-import { Router } from "express";
+import Router from "koa-router";
 import {
   createTodo,
   getAllTodos,
@@ -16,7 +16,7 @@ import {
   validateUpdateTodoData,
 } from "../validator/todo.js";
 
-const route = Router();
+const route = new Router({ prefix: "/todos" });
 
 route.get(
   "/",

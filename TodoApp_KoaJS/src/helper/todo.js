@@ -41,7 +41,7 @@ export const getAllTodosHandler = async (filters) => {
 // get  todo
 export const getTodoHandler = async (todoId) => {
   const todo = await findTodoById({ _id: todoId });
-  if (todo.length === 0) {
+  if (todo === null) {
     return { success: false, message: "No Todos Found" };
   }
 

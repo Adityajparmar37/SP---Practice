@@ -1,19 +1,14 @@
-export const validator = (validators) => (req, res, next) => {
-  const checkData = { ...req.body, ...req.params, ...req.query };
-  const method = req.method;
+import { sendResponse } from "../utils/sendResponse.js";
 
-  const errors = [].concat(
-    ...validators.map(
-      (validator) => validator(checkData, method)?.error?.details || []
-    )
+export const validator = (validators) => async (ctx, next) => {
+  const error = [].concat(
+    ...validators.map((validator) => validator(ctx)?.error?.details || [])
   );
 
-  if (errors.length > 0) {
-    return res.status(400).json({
-      message: "Validatio Error",
-      details: errors,
-    });
+  if (error.length > 0) {
+    sendResponse(ctx, 400, { message: "Validator Error's:", error });
+    return;
   }
 
-  next();
+  await next();
 };

@@ -1,8 +1,8 @@
-export const handleAsync = (controller) => async (req, res, next) => {
+export const handleAsync = (controller) => async (ctx, next) => {
   try {
-    await controller(req, res, next);
+    await controller(ctx, next);
   } catch (error) {
     console.log("error", error);
-    next(error);
+    await next(error);
   }
 };
