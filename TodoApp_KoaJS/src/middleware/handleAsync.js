@@ -2,7 +2,8 @@ export const handleAsync = (controller) => async (ctx, next) => {
   try {
     await controller(ctx, next);
   } catch (error) {
-    console.log("error", error);
-    await next(error);
+    console.error("Error caught:", error);
+    ctx.status = error.status || 500;
+    ctx.body = { error: error.message || "Internal Server Error" };
   }
 };
