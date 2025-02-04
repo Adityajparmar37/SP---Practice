@@ -14,6 +14,7 @@ import {
   findTodoById,
 } from "../query/todo.js";
 
+
 // Fetch all todos
 export const getAllTodosHandler = async (filters) => {
   let { sort, ...otherFilters } = filters;
@@ -38,6 +39,8 @@ export const getAllTodosHandler = async (filters) => {
   return { success: true, todos };
 };
 
+
+
 // get  todo
 export const getTodoHandler = async (todoId) => {
   const todo = await findTodoById({ _id: todoId });
@@ -51,6 +54,8 @@ export const getTodoHandler = async (todoId) => {
   });
   return { success: true, todo };
 };
+
+
 
 // Create a new todo
 export const createTodoHandler = async (todoData) => {
@@ -70,6 +75,8 @@ export const createTodoHandler = async (todoData) => {
     : { success: false, message: "Failed to Add Todo, please try again" };
 };
 
+
+
 // Remove a todo
 export const deleteTodoHandler = async (todoId) => {
   const todoExists = await findTodos({ _id: todoId });
@@ -82,6 +89,8 @@ export const deleteTodoHandler = async (todoId) => {
     ? { success: true, message: "Todo Removed Successfully" }
     : { success: false, message: "Failed to Remove Todo, please try again" };
 };
+
+
 
 // Update a todo
 export const updateTodoHandler = async (todoId, updatedTodoData) => {

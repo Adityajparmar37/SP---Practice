@@ -1,9 +1,10 @@
 import { client } from "../../config/connectDb.js";
+const dbClient = client
+  .db(process.env.DATABASE)
+  .collection(process.env.TODO_COLLECTION);
 
 export const findTodos = async (filter, sortOrder = 1) => {
-  const result = await client
-    .db(process.env.DATABASE)
-    .collection(process.env.TODO_COLLECTION)
+  const result = await dbClient
     .find(filter)
     .sort({ priority: sortOrder })
     .toArray();
@@ -11,30 +12,24 @@ export const findTodos = async (filter, sortOrder = 1) => {
 };
 
 export const insertTodo = async (data) => {
-  const result = await client.db("todoDb").collection("todos").insertOne(data);
+  const result = await dbClient.insertOne(data);
   return result;
 };
 
 export const removeTodoById = async (todoId) => {
-  const result = await client
-    .db(process.env.DATABASE)
-    .collection(process.env.TODO_COLLECTION)
-    .deleteOne({ _id: todoId });
+  const result = await dbClient.deleteOne({ _id: todoId });
   return result;
 };
 
 export const updateTodoById = async (todoId, updateTodoData) => {
-  const result = await client
-    .db(process.env.DATABASE)
-    .collection(process.env.TODO_COLLECTION)
-    .updateOne({ _id: todoId }, { $set: updateTodoData });
+  const result = await dbClient.updateOne(
+    { _id: todoId },
+    { $set: updateTodoData }
+  );
   return result;
 };
 
 export const findTodoById = async (filter) => {
-  const result = await client
-    .db(process.env.DATABASE)
-    .collection(process.env.TODO_COLLECTION)
-    .findOne(filter);
+  const result = await dbClient.findOne(filter);
   return result;
 };

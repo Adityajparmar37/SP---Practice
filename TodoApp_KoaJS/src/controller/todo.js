@@ -8,12 +8,10 @@ import {
 } from "../helper/todo.js";
 import { sendResponse } from "../utils/sendResponse.js";
 
-
-
 // @route   GET /api/v1/todos/
 // @desc    get all todos
 export const getAllTodos = handleAsync(async (ctx) => {
-  const queryFilters = ctx.query;
+  const queryFilters = ctx.state.shared || {};
   const result = await getAllTodosHandler(queryFilters);
 
   if (!result.success) {
@@ -28,7 +26,8 @@ export const getAllTodos = handleAsync(async (ctx) => {
 // @route   GET /api/v1/todos/:todoId
 // @desc    delete todo
 export const getTodo = handleAsync(async (ctx) => {
-  const todoId = ctx.params.todoId;
+  const todoId = ctx.state.params.todoId;
+  console.log(todoId);
   const result = await getTodoHandler(todoId);
 
   if (!result.success) {
@@ -59,7 +58,7 @@ export const createTodo = handleAsync(async (ctx) => {
 // @route   DELETE /api/v1/todos/:todoId
 // @desc    delete todo
 export const deleteTodo = handleAsync(async (ctx) => {
-  const todoId = ctx.params.todoId;
+  const todoId = ctx.state.params.todoId;
   const result = await deleteTodoHandler(todoId);
 
   if (!result.success) {
@@ -75,7 +74,7 @@ export const deleteTodo = handleAsync(async (ctx) => {
 // @route   PATCH /api/v1/todos/:todoId
 // @desc    update todo
 export const updateTodo = handleAsync(async (ctx, next) => {
-  const todoId = ctx.params.todoId;
+  const todoId = ctx.state.params.todoId;
   const updatedTodoData = ctx.request.body;
   const result = await updateTodoHandler(todoId, updatedTodoData);
 
