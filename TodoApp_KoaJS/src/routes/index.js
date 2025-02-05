@@ -1,7 +1,9 @@
 // src/routes/index.js
 import KoaRouter from "koa-router";
-const router = new KoaRouter({ prefix: "/api/v1" });
 import todoRoute from "../routes/todo.js";
+
+const router = new KoaRouter({ prefix: "/api/v1" });
+
 const ROUTERS = [todoRoute];
 
 ROUTERS.forEach((route) => {

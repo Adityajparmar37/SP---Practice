@@ -18,16 +18,11 @@ export const validateStatus = (ctx) => {
     });
   }
 
-  status
-    ? (ctx.state.shared = { ...ctx.state.shared, status })
-    : ctx.state.shared;
+  if (validationErrors.length > 0)
+    return { error: { details: validationErrors } };
 
-  return validationErrors.length > 0
-    ? { error: { details: validationErrors } }
-    : {};
+  ctx.state.shared = { ...ctx.state.shared, ...(status ? { status } : {}) };
 };
-
-
 
 export const validateSortOrder = (ctx) => {
   const validationErrors = [];
@@ -40,14 +35,11 @@ export const validateSortOrder = (ctx) => {
     });
   }
 
-  sort ? (ctx.state.shared = { ...ctx.state.shared, sort }) : ctx.state.shared;
+  if (validationErrors.length > 0)
+    return { error: { details: validationErrors } };
 
-  return validationErrors.length > 0
-    ? { error: { details: validationErrors } }
-    : {};
+  ctx.state.shared = { ...ctx.state.shared, ...(sort ? { sort } : {}) };
 };
-
-
 
 export const validatePriority = (ctx) => {
   const validationErrors = [];
@@ -67,16 +59,11 @@ export const validatePriority = (ctx) => {
     });
   }
 
-  priority
-    ? (ctx.state.shared = { ...ctx.state.shared, priority })
-    : ctx.state.shared;
+  if (validationErrors.length > 0)
+    return { error: { details: validationErrors } };
 
-  return validationErrors.length > 0
-    ? { error: { details: validationErrors } }
-    : {};
+  ctx.state.shared = { ...ctx.state.shared, ...(priority ? { priority } : {}) };
 };
-
-
 
 export const validateDescription = (ctx) => {
   const validationErrors = [];
@@ -96,16 +83,14 @@ export const validateDescription = (ctx) => {
     });
   }
 
-  description
-    ? (ctx.state.shared = { ...ctx.state.shared, description })
-    : ctx.state.shared;
+  if (validationErrors.length > 0)
+    return { error: { details: validationErrors } };
 
-  return validationErrors.length > 0
-    ? { error: { details: validationErrors } }
-    : {};
+  ctx.state.shared = {
+    ...ctx.state.shared,
+    ...(description ? { description } : {}),
+  };
 };
-
-
 
 export const validateTodoId = (ctx) => {
   const validationErrors = [];
@@ -123,25 +108,17 @@ export const validateTodoId = (ctx) => {
     });
   }
 
-  todoId
-    ? (ctx.state.params = { ...ctx.state.params, todoId })
-    : ctx.state.params;
+  if (validationErrors.length > 0)
+    return { error: { details: validationErrors } };
 
-  return validationErrors.length > 0
-    ? { error: { details: validationErrors } }
-    : {};
+  ctx.state.params = { ...ctx.state.params, ...(todoId ? { todoId } : {}) };
 };
-
-
 
 export const validateUpdateTodoData = (ctx) => {
   const validationErrors = [];
+  const { description, status, priority } = ctx.request.body;
 
-  if (
-    !ctx.request.body.description &&
-    !ctx.request.body.status &&
-    !ctx.request.body.priority
-  ) {
+  if (!description && !status && !priority) {
     validationErrors.push({
       field: "updateTodo",
       message: "Please provide data to update.",

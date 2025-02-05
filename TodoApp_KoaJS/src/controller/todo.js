@@ -42,7 +42,7 @@ export const getTodo = handleAsync(async (ctx) => {
 // @route   POST /api/v1/todos/
 // @desc    create todo
 export const createTodo = handleAsync(async (ctx) => {
-  const todoData = ctx.request.body;
+  const todoData = ctx.state.shared;
   const result = await createTodoHandler(todoData);
 
   if (!result.success) {
@@ -75,7 +75,7 @@ export const deleteTodo = handleAsync(async (ctx) => {
 // @desc    update todo
 export const updateTodo = handleAsync(async (ctx, next) => {
   const todoId = ctx.state.params.todoId;
-  const updatedTodoData = ctx.request.body;
+  const updatedTodoData = ctx.state.shared;
   const result = await updateTodoHandler(todoId, updatedTodoData);
 
   if (!result.success) {
