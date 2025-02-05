@@ -27,7 +27,6 @@ export const getAllTodos = handleAsync(async (ctx) => {
 // @desc    delete todo
 export const getTodo = handleAsync(async (ctx) => {
   const todoId = ctx.state.params.todoId;
-  console.log(todoId);
   const result = await getTodoHandler(todoId);
 
   if (!result.success) {
