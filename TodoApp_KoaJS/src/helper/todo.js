@@ -54,11 +54,15 @@ export const getTodoHandler = async (todoId) => {
 
 // Create a new todo
 export const createTodoHandler = async (todoData) => {
+  const timeStamp = new Date().toISOString();
+
   const newTodo = {
     ...todoData,
     _id: generateId(),
     status: statusMapping.get(todoData.status),
     priority: priorityMapping.get(todoData.priority),
+    createdAt: timeStamp,
+    updatedAt: timeStamp,
   };
   const response = await insertTodo(newTodo);
   return response.acknowledged
@@ -68,7 +72,6 @@ export const createTodoHandler = async (todoData) => {
       }
     : { success: false, message: "Failed to Add Todo, please try again" };
 };
-
 
 // Remove a todo
 export const deleteTodoHandler = async (todoId) => {
@@ -85,6 +88,7 @@ export const deleteTodoHandler = async (todoId) => {
 
 // Update a todo
 export const updateTodoHandler = async (todoId, updatedTodoData) => {
+  const updateTimeStamp = new Date().toISOString();
   const filter = { _id: todoId };
   const todoExists = await findTodos(filter);
   if (todoExists.length === 0) {
@@ -98,6 +102,8 @@ export const updateTodoHandler = async (todoId, updatedTodoData) => {
   if (updatedTodoData.status) {
     updatedTodoData.status = statusMapping.get(updatedTodoData.status);
   }
+  
+  updatedTodoData.updatedAt = updateTimeStamp;
 
   const response = await updateTodoById(todoId, updatedTodoData);
   return response.modifiedCount > 0
