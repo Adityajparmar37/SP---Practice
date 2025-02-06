@@ -2,7 +2,7 @@ import { client } from "../../config/connectDb.js";
 
 const dbClient = client.db(process.env.DATABASE).collection("todos");
 
-export const findTodos = async (filter, sortOrder = 1, page = 1 , limit = 10) =>
+export const findTodos = async (filter, sortOrder = 1, page = 1, limit = 10) =>
   await dbClient
     .find(filter)
     .sort({ priority: sortOrder })

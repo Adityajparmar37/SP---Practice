@@ -28,7 +28,7 @@ export const registerUserHandler = async (userData) => {
 };
 
 export const loginUserHandler = async (userData) => {
-  const userExist = await findUser(userData);
+  const userExist = await findUser(userData.email);
   if (!userExist)
     return { success: false, message: "User not found, Please register" };
   if (!comparePassword(userExist.password, userData.password)) {
@@ -37,6 +37,6 @@ export const loginUserHandler = async (userData) => {
   return {
     success: true,
     message: "User login Successfully",
-    token: createToken(userData),
+    token: createToken(userExist),
   };
 };
