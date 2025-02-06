@@ -39,8 +39,8 @@ export const getAllTodosHandler = async (filters) => {
 };
 
 // get  todo
-export const getTodoHandler = async (todoId) => {
-  const todo = await findTodoById({ _id: todoId });
+export const getTodoHandler = async (todoId, userId) => {
+  const todo = await findTodoById({ _id: todoId, userId });
   if (todo === null) {
     return { success: false, message: "No Todos Found" };
   }
@@ -52,18 +52,21 @@ export const getTodoHandler = async (todoId) => {
   return { success: true, todo };
 };
 
-// Create a new todo
-export const createTodoHandler = async (todoData) => {
+// Create  new todo
+export const createTodoHandler = async (todoData, userId) => {
   const timeStamp = new Date().toISOString();
 
   const newTodo = {
     ...todoData,
     _id: generateId(),
+    userId,
     status: statusMapping.get(todoData.status),
     priority: priorityMapping.get(todoData.priority),
     createdAt: timeStamp,
     updatedAt: timeStamp,
   };
+
+  // Object.assign()
   const response = await insertTodo(newTodo);
   return response.acknowledged
     ? {
@@ -74,8 +77,8 @@ export const createTodoHandler = async (todoData) => {
 };
 
 // Remove a todo
-export const deleteTodoHandler = async (todoId) => {
-  const todoExists = await findTodos({ _id: todoId });
+export const deleteTodoHandler = async (todoId, userId) => {
+  const todoExists = await findTodoById({ _id: todoId, userId });
   if (todoExists.length === 0) {
     return { success: false, message: "Todo not found" };
   }
@@ -87,10 +90,9 @@ export const deleteTodoHandler = async (todoId) => {
 };
 
 // Update a todo
-export const updateTodoHandler = async (todoId, updatedTodoData) => {
+export const updateTodoHandler = async (todoId, updatedTodoData, userId) => {
   const updateTimeStamp = new Date().toISOString();
-  const filter = { _id: todoId };
-  const todoExists = await findTodos(filter);
+  const todoExists = await findTodoById({ _id: todoId, userId });
   if (todoExists.length === 0) {
     return { success: false, message: "Todo not found" };
   }
@@ -102,7 +104,7 @@ export const updateTodoHandler = async (todoId, updatedTodoData) => {
   if (updatedTodoData.status) {
     updatedTodoData.status = statusMapping.get(updatedTodoData.status);
   }
-  
+
   updatedTodoData.updatedAt = updateTimeStamp;
 
   const response = await updateTodoById(todoId, updatedTodoData);
