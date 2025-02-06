@@ -8,10 +8,10 @@ const createToken = (user) =>
     _id: user._id,
     userName: user.userName,
     email: user.email,
+    password: user.password,
   });
 
 export const registerUserHandler = async (userData) => {
-  
   const hashedPassword = await hashPassword(userData.password);
   const userId = generateId();
   Object.assign(userData, { _id: userId, password: hashedPassword });
