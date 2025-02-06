@@ -6,6 +6,7 @@ import {
   updateTodo,
   getTodo,
 } from "../controller/todo.js";
+import { auth } from "../middleware/auth.js";
 import { validator } from "../middleware/validator.js";
 import {
   validateDescription,
@@ -15,12 +16,15 @@ import {
   validateTodoId,
   validateUpdateTodoData,
 } from "../validator/todo.js";
+import { validateUserNotExist } from "../validator/auth.js";
 
 const route = new Router({ prefix: "/todos" });
 
 route.get(
   "/",
+  auth,
   validator([
+    validateUserNotExist,
     validateStatus,
     validatePriority,
     validateDescription,
@@ -29,19 +33,36 @@ route.get(
   getAllTodos
 );
 
-route.get("/:todoId", validator([validateTodoId]), getTodo);
+route.get(
+  "/:todoId",
+  auth,
+  validator([validateUserNotExist, validateTodoId]),
+  getTodo
+);
 
 route.post(
   "/",
-  validator([validateStatus, validatePriority, validateDescription]),
+  auth,
+  validator([
+    validateUserNotExist,
+    validateStatus,
+    validatePriority,
+    validateDescription,
+  ]),
   createTodo
 );
 
-route.delete("/:todoId", validator([validateTodoId]), deleteTodo);
+route.delete(
+  "/:todoId",
+  validator([validateUserNotExist, validateTodoId]),
+  deleteTodo
+);
 
 route.patch(
   "/:todoId",
+  auth,
   validator([
+    validateUserNotExist,
     validateUpdateTodoData,
     validateTodoId,
     validateStatus,

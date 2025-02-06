@@ -1,12 +1,18 @@
 import { sendResponse } from "../utils/sendResponse.js";
+import Bluebird from "bluebird";
 
 export const validator = (validators) => async (ctx, next) => {
-  const error = [].concat(
-    ...validators.map((validator) => validator(ctx)?.error?.details || [])
-  );
+  const errors = await Bluebird.mapSeries(validators, async (validator) => {
+    const result = await validator(ctx);
+    return result?.error?.details || [];
+  });
+  const flattenedErrors = errors.flat();  
 
-  if (error.length > 0) {
-    sendResponse(ctx, 400, { message: "Validator Error's:", error });
+  if (flattenedErrors.length > 0) {
+    sendResponse(ctx, 400, {
+      message: "Validator Errors:",
+      error: flattenedErrors,
+    });
     return;
   }
 
