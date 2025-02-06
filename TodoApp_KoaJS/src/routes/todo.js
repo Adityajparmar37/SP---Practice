@@ -14,6 +14,7 @@ import {
   validateSortOrder,
   validateStatus,
   validateTodoId,
+  validatePage,
   validateUpdateTodoData,
 } from "../validator/todo.js";
 import { validateUserNotExist } from "../validator/auth.js";
@@ -25,6 +26,7 @@ route.get(
   auth,
   validator([
     validateUserNotExist,
+    validatePage,
     validateStatus,
     validatePriority,
     validateDescription,

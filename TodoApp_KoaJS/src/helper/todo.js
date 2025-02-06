@@ -16,7 +16,7 @@ import {
 
 // Fetch all todos
 export const getAllTodosHandler = async (filters) => {
-  let { sort, ...otherFilters } = filters;
+  let { sort, page, limit, ...otherFilters } = filters;
   if (otherFilters.priority) {
     otherFilters.priority = priorityMapping.get(otherFilters.priority);
   }
@@ -25,7 +25,7 @@ export const getAllTodosHandler = async (filters) => {
   }
   const sortOrder = sort ? sortMapping.get(sort) : 1;
 
-  let todos = await findTodos(otherFilters, sortOrder);
+  let todos = await findTodos(otherFilters, sortOrder, page, limit);
   if (todos.length === 0) {
     return { success: false, message: "No Todos Found" };
   }
@@ -55,19 +55,15 @@ export const getTodoHandler = async (todoId, userId) => {
 // Create  new todo
 export const createTodoHandler = async (todoData, userId) => {
   const timeStamp = new Date().toISOString();
-
-  const newTodo = {
-    ...todoData,
+  Object.assign(todoData, {
     _id: generateId(),
     userId,
     status: statusMapping.get(todoData.status),
     priority: priorityMapping.get(todoData.priority),
     createdAt: timeStamp,
     updatedAt: timeStamp,
-  };
-
-  // Object.assign()
-  const response = await insertTodo(newTodo);
+  });
+  const response = await insertTodo(todoData);
   return response.acknowledged
     ? {
         success: true,

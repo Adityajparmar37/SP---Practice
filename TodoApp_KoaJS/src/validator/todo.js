@@ -28,7 +28,7 @@ export const validateSortOrder = (ctx) => {
   const validationErrors = [];
   const sort = ctx.query.sort;
 
-  if (ctx.query.sort && !["AESC", "DESC"].includes(ctx.query.sort)) {
+  if (sort && !["AESC", "DESC"].includes(ctx.query.sort)) {
     validationErrors.push({
       field: "sort",
       message: "Sort must be either 'AESC' or 'DESC'",
@@ -128,4 +128,44 @@ export const validateUpdateTodoData = (ctx) => {
   return validationErrors.length > 0
     ? { error: { details: validationErrors } }
     : {};
+};
+
+
+export const validatePage = (ctx) => {
+  const validationErrors = [];
+  const { page, limit } = ctx.query;
+
+  // Validate page
+  if (page !== undefined) {
+    const parsedPage = parseInt(page, 10);
+    if (isNaN(parsedPage) || parsedPage < 1) {
+      validationErrors.push({
+        field: "page",
+        message: "Page must be a positive integer",
+      });
+    }
+  }
+
+  // Validate limit
+  if (limit !== undefined) {
+    const parsedLimit = parseInt(limit, 10);
+    if (isNaN(parsedLimit) || parsedLimit < 1) {
+      validationErrors.push({
+        field: "limit",
+        message: "Limit must be a positive integer",
+      });
+    }
+  }
+
+  if (validationErrors.length > 0) {
+    ctx.status = 400;
+    ctx.body = { error: { details: validationErrors } };
+    return;
+  }
+
+  ctx.state.shared = {
+    ...ctx.state.shared,
+    ...(page ? { page: parseInt(page, 10) } : {}),
+    ...(limit ? { limit: parseInt(limit, 10) } : {}),
+  };
 };
