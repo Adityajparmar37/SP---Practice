@@ -98,8 +98,7 @@ export const validateUserExist = async (ctx) => {
 export const validateUserNotExist = async (ctx) => {
   const validationErrors = [];
   const { email } = ctx.state.user;
-  console.log(email)
-
+  
   if (email) {
     const isUserExist = await findUser(email);
     if (!isUserExist) {
