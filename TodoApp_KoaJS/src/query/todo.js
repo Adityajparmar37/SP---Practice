@@ -1,4 +1,4 @@
-import { client } from "../../config/connectDb.js";
+import { client } from "../config/connectDb.js";
 
 const dbClient = client.db(process.env.DATABASE).collection("todos");
 

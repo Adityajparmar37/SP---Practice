@@ -1,5 +1,4 @@
-import { client } from "../../config/connectDb.js";
-
+import { client } from "../config/connectDb.js";
 const dbClient = client.db(process.env.DATABASE).collection("users");
 
 export const insertUser = async (data) => await dbClient.insertOne(data);
