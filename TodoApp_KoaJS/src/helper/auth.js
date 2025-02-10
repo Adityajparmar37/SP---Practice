@@ -29,7 +29,8 @@ export const loginUserHandler = async (userData) => {
   const userExist = await findUser(userData.email);
   if (!userExist)
     return { success: false, message: "User not found, Please register" };
-  if (!await comparePassword(userExist.password, userData.password)) {
+  console.log(await comparePassword(userData.password, userExist.password));
+  if (!(await comparePassword(userData.password, userExist.password))) {
     return { success: false, message: "Please provide a vaild password" };
   }
   return {

@@ -78,15 +78,9 @@ export const validatePassword = (ctx) => {
 
 export const isUserExist = async (ctx) => {
   const validationErrors = [];
-  const { email } = ctx.state.user;
+  const { email } = ctx?.state.user;
 
-  if (!email) {
-    validationErrors.push({
-      field: "email",
-      message: "Please provid email",
-    });
-  }
-
+  
   const isUserExist = await findUser(email);
   if (isUserExist) {
     validationErrors.push({

@@ -1,7 +1,8 @@
 export const isEmailValid = (email) => {
-  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  const emailRegex = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,6}$/;
+  console.log(email.length);
 
-  if (!emailRegex.test(email)) return false;
+  if (!emailRegex.test(email) || email.length >= 320) return false;
 
   return true;
 };
