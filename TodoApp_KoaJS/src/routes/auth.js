@@ -6,6 +6,7 @@ import {
   validateEmail,
   isUserExist,
   validateUserName,
+  validateLoginPassword,
 } from "../validator/auth.js";
 
 const route = new Router({ prefix: "/auth" });
@@ -16,6 +17,10 @@ route.post(
   registerUser
 );
 
-route.post("/login", validator([validateEmail, validatePassword]), loginUser);
+route.post(
+  "/login",
+  validator([validateEmail, validateLoginPassword]),
+  loginUser
+);
 
 export default route;

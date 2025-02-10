@@ -100,3 +100,20 @@ export const isUserExist = async (ctx) => {
   }
 };
 
+export const validateLoginPassword = (ctx) => {
+  const validationErrors = [];
+  const password = ctx.request.body.password;
+
+  if (!password) {
+    validationErrors.push({
+      field: "password",
+      message: "Password must be provided",
+    });
+  }
+
+  if (validationErrors.length > 0) {
+    return { error: { details: validationErrors } };
+  }
+
+  ctx.state.user = { ...ctx.state.user, ...(password ? { password } : {}) };
+};
