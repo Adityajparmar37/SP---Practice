@@ -75,7 +75,7 @@ export const createTodoHandler = async (todoData, userId) => {
 // Remove a todo
 export const deleteTodoHandler = async (todoId, userId) => {
   const todoExists = await findTodoById({ _id: todoId, userId });
-  if (todoExists.length === 0) {
+  if (todoExists === 0) {
     return { success: false, message: "Todo not found" };
   }
 
