@@ -7,8 +7,9 @@ const connectDb = async () => {
     await client.connect();
     console.log("connected to db");
   } catch (error) {
+    //print in slack error
     console.log("Error Connection db ", error);
-     throw new Error("Database connection failed");
+    throw new Error("Database connection failed");
   }
 };
 

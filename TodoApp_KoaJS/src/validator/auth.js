@@ -76,18 +76,23 @@ export const validatePassword = (ctx) => {
   ctx.state.user = { ...ctx.state.user, ...(password ? { password } : {}) };
 };
 
-export const validateUserExist = async (ctx) => {
+export const isUserExist = async (ctx) => {
   const validationErrors = [];
   const { email } = ctx.state.user;
 
-  if (email) {
-    const isUserExist = await findUser(email);
-    if (isUserExist) {
-      validationErrors.push({
-        field: "User exist",
-        message: "User already exists",
-      });
-    }
+  if (!email) {
+    validationErrors.push({
+      field: "email",
+      message: "Please provid email",
+    });
+  }
+
+  const isUserExist = await findUser(email);
+  if (isUserExist) {
+    validationErrors.push({
+      field: "User exist",
+      message: "User already exists",
+    });
   }
 
   if (validationErrors.length > 0) {
@@ -95,21 +100,3 @@ export const validateUserExist = async (ctx) => {
   }
 };
 
-export const validateUserNotExist = async (ctx) => {
-  const validationErrors = [];
-  const { email } = ctx.state.user;
-  
-  if (email) {
-    const isUserExist = await findUser(email);
-    if (!isUserExist) {
-      validationErrors.push({
-        field: "User exist",
-        message: "User not exists",
-      });
-    }
-  }
-
-  if (validationErrors.length > 0) {
-    return { error: { details: validationErrors } };
-  }
-};

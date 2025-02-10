@@ -4,7 +4,7 @@ import { validator } from "../middleware/validator.js";
 import {
   validatePassword,
   validateEmail,
-  validateUserExist,
+  isUserExist,
   validateUserName,
 } from "../validator/auth.js";
 
@@ -12,12 +12,7 @@ const route = new Router({ prefix: "/auth" });
 
 route.post(
   "/register",
-  validator([
-    validateUserName,
-    validateEmail,
-    validatePassword,
-    validateUserExist,
-  ]),
+  validator([validateUserName, validateEmail, validatePassword, isUserExist]),
   registerUser
 );
 

@@ -1,3 +1,5 @@
+import { findUserById } from "../query/auth.js";
+import { isUserId } from "../shared/userId.js";
 import { sendResponse } from "../utils/sendResponse.js";
 import { verifyToken } from "../utils/token.js";
 
@@ -16,7 +18,12 @@ export const auth = async (ctx, next) => {
       message: "Unauthorized: Invalid Token",
     });
 
-  ctx.state.user = isUserVerify;
+  const userExists = await findUserById(isUserVerify._id);
+  if (!userExists)
+    return sendResponse(ctx, 401, {
+      message: "User does not exist",
+    });
 
+  ctx.state.user = isUserVerify;
   await next();
 };

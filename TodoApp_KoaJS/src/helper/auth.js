@@ -6,9 +6,7 @@ import { generateId } from "../utils/createID.js";
 const createToken = (user) =>
   generateToken({
     _id: user._id,
-    userName: user.userName,
     email: user.email,
-    password: user.password,
   });
 
 export const registerUserHandler = async (userData) => {

@@ -17,7 +17,6 @@ import {
   validatePage,
   validateUpdateTodoData,
 } from "../validator/todo.js";
-import { validateUserNotExist } from "../validator/auth.js";
 
 const route = new Router({ prefix: "/todos" });
 
@@ -25,7 +24,6 @@ route.get(
   "/",
   auth,
   validator([
-    validateUserNotExist,
     validatePage,
     validateStatus,
     validatePriority,
@@ -38,7 +36,7 @@ route.get(
 route.get(
   "/:todoId",
   auth,
-  validator([validateUserNotExist, validateTodoId]),
+  validator([validateTodoId]),
   getTodo
 );
 
@@ -46,7 +44,6 @@ route.post(
   "/",
   auth,
   validator([
-    validateUserNotExist,
     validateStatus,
     validatePriority,
     validateDescription,
@@ -56,7 +53,7 @@ route.post(
 
 route.delete(
   "/:todoId",
-  validator([validateUserNotExist, validateTodoId]),
+  validator([validateTodoId]),
   deleteTodo
 );
 
@@ -64,7 +61,6 @@ route.patch(
   "/:todoId",
   auth,
   validator([
-    validateUserNotExist,
     validateUpdateTodoData,
     validateTodoId,
     validateStatus,

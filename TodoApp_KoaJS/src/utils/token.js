@@ -9,7 +9,8 @@ export const verifyToken = (token) => {
   try {
     return jwt.verify(token, process.env.SECRET_JWT_KEY);
   } catch (error) {
-    console.log(error)
+    //print in slack error
+    console.log(error);
     // if token is not valid
     return null;
   }
