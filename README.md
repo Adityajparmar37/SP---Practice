@@ -1,13 +1,13 @@
 # SP---Practice
 
-TodoApp: 
+TodoApp:  
 
-Convert to KoaJS from Express
-Refactor code : naming convension of variable , api naming and file
-Auth added
-Pagination added
-All changes done
+- Convert to KoaJS from Express  
+- Refactor code: naming convention of variables, API naming, and files  
+- Auth added  
+- Pagination added  
+- All changes done  
+- Full search for description  
 
-left :
-Search in todo
-do not override _id
+**Left:**  
+- Do not override `_id`
