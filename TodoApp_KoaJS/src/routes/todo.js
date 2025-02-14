@@ -16,6 +16,7 @@ import {
   validateTodoId,
   validatePage,
   validateUpdateTodoData,
+  validateSearchTerm,
 } from "../validator/todo.js";
 
 const route = new Router({ prefix: "/todos" });
@@ -29,6 +30,7 @@ route.get(
     validatePriority,
     validateDescription,
     validateSortOrder,
+    validateSearchTerm,
   ]),
   getAllTodos
 );

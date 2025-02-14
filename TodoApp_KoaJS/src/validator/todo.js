@@ -51,6 +51,20 @@ export const validatePriority = (ctx) => {
   ctx.state.shared = { ...ctx.state.shared, ...(priority ? { priority } : {}) };
 };
 
+export const validateSearchTerm = (ctx) => {
+  const searchTerm = ctx.query.search;
+  if (searchTerm && typeof searchTerm !== "string") {
+    return {
+      field: "search",
+      message: "Please enter valid search term",
+    };
+  }
+  ctx.state.shared = {
+    ...ctx.state.shared,
+    ...(searchTerm ? { searchTerm } : {}),
+  };
+};
+
 export const validateDescription = (ctx) => {
   const description = ctx.request.body.description;
 

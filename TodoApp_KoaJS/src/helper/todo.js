@@ -16,12 +16,15 @@ import {
 
 // Fetch all todos
 export const getAllTodosHandler = async (filters) => {
-  let { sort, page, limit, ...otherFilters } = filters;
+  let { sort, page, limit, searchTerm, ...otherFilters } = filters;
   if (otherFilters.priority) {
     otherFilters.priority = priorityMapping.get(otherFilters.priority);
   }
   if (otherFilters.status) {
     otherFilters.status = statusMapping.get(otherFilters.status);
+  }
+  if (searchTerm) {
+    otherFilters.$text = { $search: searchTerm };
   }
   const sortOrder = sort ? sortMapping.get(sort) : 1;
 
