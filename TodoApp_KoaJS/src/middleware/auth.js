@@ -12,12 +12,11 @@ export const auth = async (ctx, next) => {
     });
 
   const isUserVerify = verifyToken(token);
-
   if (!isUserVerify)
     return sendResponse(ctx, 401, {
       message: "Unauthorized: Invalid Token",
     });
-
+  
   const userExists = await findUserById(isUserVerify._id);
   if (!userExists)
     return sendResponse(ctx, 401, {

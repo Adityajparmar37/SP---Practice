@@ -7,6 +7,7 @@ import {
   isUserExist,
   validateUserName,
   validateLoginPassword,
+  validateLoginCredential,
 } from "../validator/auth.js";
 
 const route = new Router({ prefix: "/auth" });
@@ -19,7 +20,7 @@ route.post(
 
 route.post(
   "/login",
-  validator([validateEmail, validateLoginPassword]),
+  validator([validateEmail, validateLoginPassword, validateLoginCredential]),
   loginUser
 );
 

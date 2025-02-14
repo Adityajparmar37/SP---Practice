@@ -2,62 +2,54 @@ import { isUsernameValid } from "../shared/userName.js";
 import { isEmailValid } from "../shared/email.js";
 import { isPasswordValid } from "../shared/password.js";
 import { findUser } from "../query/auth.js";
+import { comparePassword } from "../utils/password.js";
 
 export const validateUserName = (ctx) => {
-  const validationErrors = [];
   const userName = ctx.request.body.userName;
 
   if (!userName) {
-    validationErrors.push({
+    return {
       field: "userName",
       message: "userName must be provide",
-    });
+    };
   } else if (!isUsernameValid(userName)) {
-    validationErrors.push({
+    return {
       field: "userName",
       message:
         "userName must be valid: alphabets, number and speical characters.",
-    });
+    };
   }
-  if (validationErrors.length > 0)
-    return { error: { details: validationErrors } };
-
   ctx.state.user = { ...ctx.state.user, ...(userName ? { userName } : {}) };
 };
 
 export const validateEmail = (ctx) => {
-  const validationErrors = [];
   const email = ctx.request.body.email;
 
   if (!email) {
-    validationErrors.push({
+    return {
       field: "email",
       message: "email must be provide",
-    });
+    };
   } else if (!isEmailValid(email)) {
-    validationErrors.push({
+    return {
       field: "email",
       message: "Please provide a valid email",
-    });
+    };
   }
-
-  if (validationErrors.length > 0)
-    return { error: { details: validationErrors } };
-
   ctx.state.user = { ...ctx.state.user, ...(email ? { email } : {}) };
+  return;
 };
 
 export const validatePassword = (ctx) => {
-  const validationErrors = [];
   const password = ctx.request.body.password;
 
   if (!password) {
-    validationErrors.push({
+    return {
       field: "password",
-      message: "Password must be provided",
-    });
+      message: "password must be provide",
+    };
   } else if (!isPasswordValid(password)) {
-    validationErrors.push({
+    return {
       field: "password",
       message: `Please provide a valid password:
 - At least one uppercase letter
@@ -66,48 +58,54 @@ export const validatePassword = (ctx) => {
 - At least one special character
 - Minimum length of 8 characters
 - Maximum length of 16 characters`,
-    });
-  }
-
-  if (validationErrors.length > 0) {
-    return { error: { details: validationErrors } };
+    };
   }
 
   ctx.state.user = { ...ctx.state.user, ...(password ? { password } : {}) };
 };
 
 export const isUserExist = async (ctx) => {
-  const validationErrors = [];
   const { email } = ctx?.state.user;
 
-  
   const isUserExist = await findUser(email);
   if (isUserExist) {
-    validationErrors.push({
-      field: "User exist",
-      message: "User already exists",
-    });
-  }
-
-  if (validationErrors.length > 0) {
-    return { error: { details: validationErrors } };
+    return {
+      field: "user",
+      message: "user already exist",
+    };
   }
 };
 
 export const validateLoginPassword = (ctx) => {
-  const validationErrors = [];
   const password = ctx.request.body.password;
 
   if (!password) {
-    validationErrors.push({
+    return {
       field: "password",
-      message: "Password must be provided",
-    });
-  }
-
-  if (validationErrors.length > 0) {
-    return { error: { details: validationErrors } };
+      message: "password must be provide",
+    };
   }
 
   ctx.state.user = { ...ctx.state.user, ...(password ? { password } : {}) };
+  return;
+};
+
+export const validateLoginCredential = async (ctx) => {
+  const { email, password } = ctx?.state.user;
+  const userExist = await findUser(email);
+  if (!userExist) {
+    return {
+      field: "email",
+      message: "user does not exist, please register",
+    };
+  }
+
+  if (!(await comparePassword(password, userExist.password))) {
+    return {
+      field: "password",
+      message: "please enter valid password",
+    };
+  }
+
+  ctx.state.user = { ...ctx.state.user, ...(userExist ? { ... userExist } : {}) };
 };
